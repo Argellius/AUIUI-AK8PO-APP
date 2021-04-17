@@ -60,11 +60,11 @@
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 2;
             // 
-            // comboBox1
+            // comboBox_Zamestnanec
             // 
             this.comboBox_Zamestnanec.FormattingEnabled = true;
             this.comboBox_Zamestnanec.Location = new System.Drawing.Point(13, 96);
-            this.comboBox_Zamestnanec.Name = "comboBox1";
+            this.comboBox_Zamestnanec.Name = "comboBox_Zamestnanec";
             this.comboBox_Zamestnanec.Size = new System.Drawing.Size(100, 21);
             this.comboBox_Zamestnanec.TabIndex = 3;
             // 
@@ -72,7 +72,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(139, 199);
+            this.ClientSize = new System.Drawing.Size(162, 199);
             this.Controls.Add(this.comboBox_Zamestnanec);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);

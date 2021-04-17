@@ -57,9 +57,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -100,9 +100,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -148,9 +148,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -195,9 +195,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -241,9 +241,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -288,9 +288,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -327,7 +327,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             {
                 command.Connection = this.conn;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "INSERT into Predmet (Zkratka, Pocet_Tydnu, Hodin_Prednasek, Hodin_Seminar, Zpusob_Zakonceni, Jazyk, Velikost_Tridy, Seznam_Skupin, Hodin_Cviceni) VALUES (@Zkratka, @Pocet_Tydnu, @Hodin_Prednasek, @Hodin_Seminar, @Zpusob_Zakonceni, @Jazyk, @Velikost_Tridy, @Seznam_Skupin, @Hodin_Cviceni)";
+                command.CommandText = "INSERT into Predmet (Zkratka, Pocet_Tydnu, Hodin_Prednasek, Hodin_Seminar, Zpusob_Zakonceni, Jazyk, Velikost_Tridy, Skupina, Hodin_Cviceni) VALUES (@Zkratka, @Pocet_Tydnu, @Hodin_Prednasek, @Hodin_Seminar, @Zpusob_Zakonceni, @Jazyk, @Velikost_Tridy, @Skupina, @Hodin_Cviceni)";
                 command.Parameters.AddWithValue("@Zkratka", Zkratka);
                 command.Parameters.AddWithValue("@Pocet_Tydnu", Pocet_Tydnu);
                 command.Parameters.AddWithValue("@Hodin_Prednasek", Hodin_Prednasek);
@@ -335,7 +335,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 command.Parameters.AddWithValue("@Zpusob_Zakonceni", Zpusob_Zakonceni);
                 command.Parameters.AddWithValue("@Jazyk", Jazyk);
                 command.Parameters.AddWithValue("@Velikost_Tridy", Velikost_Tridy);
-                command.Parameters.AddWithValue("@Seznam_Skupin", Seznam_Skupin);
+                command.Parameters.AddWithValue("@Skupina", Seznam_Skupin);
                 command.Parameters.AddWithValue("@Hodin_Cviceni", Hodin_Cviceni);
 
                 try
@@ -343,10 +343,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
-                }
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+                }            
                 finally
                 {
                     conn.Close();
@@ -356,12 +356,12 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
-        public DataTable getSkupina()
+        public DataTable getSkupina(string Id="")
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Skupina", conn);
+            SqlCommand command = new SqlCommand(String.Format("Select * from Skupina WHERE Id='" + Id + "'"), conn);
             // int result = command.ExecuteNonQuery();
 
             {
@@ -395,9 +395,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -465,9 +465,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     conn.Open();
                     int recordsAffected = command.ExecuteNonQuery();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
-                    // error here
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -545,7 +545,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {
@@ -574,7 +574,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 }
                 catch (SqlException e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
                 }
                 finally
                 {

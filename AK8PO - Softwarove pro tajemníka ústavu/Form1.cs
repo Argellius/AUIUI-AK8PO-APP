@@ -29,7 +29,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         private void button2_Click(object sender, EventArgs e)
         {
             // Create a new instance of the Form2 class
-            Form_Skupina settingsForm = new Form_Skupina();
+            Form_Seznam_Skupin settingsForm = new Form_Seznam_Skupin();
 
             // Show the settings form
             settingsForm.Show();

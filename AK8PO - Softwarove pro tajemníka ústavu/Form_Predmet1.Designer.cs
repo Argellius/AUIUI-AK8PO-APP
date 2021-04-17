@@ -55,7 +55,7 @@
             this.comboBox_Zpusob_Zakonceni.Location = new System.Drawing.Point(181, 157);
             this.comboBox_Zpusob_Zakonceni.Name = "comboBox_Zpusob_Zakonceni";
             this.comboBox_Zpusob_Zakonceni.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Zpusob_Zakonceni.TabIndex = 24;
+            this.comboBox_Zpusob_Zakonceni.TabIndex = 32;
             // 
             // textBox_Pocet_Tyden
             // 
@@ -77,7 +77,7 @@
             this.label3.Location = new System.Drawing.Point(12, 165);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
-            this.label3.TabIndex = 16;
+            this.label3.TabIndex = 26;
             this.label3.Text = "Způsob zakončení";
             // 
             // label2
@@ -111,7 +111,7 @@
             this.label8.Location = new System.Drawing.Point(12, 81);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(147, 13);
-            this.label8.TabIndex = 28;
+            this.label8.TabIndex = 23;
             this.label8.Text = "Počet hodinových přednášek";
             // 
             // textBox_Pocet_Hodin_Cviceni
@@ -127,7 +127,7 @@
             this.label9.Location = new System.Drawing.Point(12, 109);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(132, 13);
-            this.label9.TabIndex = 30;
+            this.label9.TabIndex = 24;
             this.label9.Text = "Počet hodinových cvičení";
             // 
             // textBox_Pocet_Hodin_Seminar
@@ -143,7 +143,7 @@
             this.label10.Location = new System.Drawing.Point(12, 137);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(139, 13);
-            this.label10.TabIndex = 32;
+            this.label10.TabIndex = 25;
             this.label10.Text = "Počet hodinových seminářů";
             // 
             // comboBox_Jazyk
