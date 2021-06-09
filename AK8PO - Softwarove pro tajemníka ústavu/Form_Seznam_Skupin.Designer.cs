@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button_Pridat_Skupiny = new System.Windows.Forms.Button();
             this.Column_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Zkratka = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_Pridat_Skupiny = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,16 +47,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(147, 150);
             this.dataGridView1.TabIndex = 0;
             // 
-            // button_Pridat_Skupiny
-            // 
-            this.button_Pridat_Skupiny.Location = new System.Drawing.Point(165, 12);
-            this.button_Pridat_Skupiny.Name = "button_Pridat_Skupiny";
-            this.button_Pridat_Skupiny.Size = new System.Drawing.Size(85, 23);
-            this.button_Pridat_Skupiny.TabIndex = 1;
-            this.button_Pridat_Skupiny.Text = "Přidat skupiny";
-            this.button_Pridat_Skupiny.UseVisualStyleBackColor = true;
-            this.button_Pridat_Skupiny.Click += new System.EventHandler(this.button_Pridat_Skupiny_Click);
-            // 
             // Column_Id
             // 
             this.Column_Id.HeaderText = "Id";
@@ -67,11 +58,32 @@
             this.Column_Zkratka.HeaderText = "Zkratka";
             this.Column_Zkratka.Name = "Column_Zkratka";
             // 
+            // button_Pridat_Skupiny
+            // 
+            this.button_Pridat_Skupiny.Location = new System.Drawing.Point(165, 12);
+            this.button_Pridat_Skupiny.Name = "button_Pridat_Skupiny";
+            this.button_Pridat_Skupiny.Size = new System.Drawing.Size(85, 23);
+            this.button_Pridat_Skupiny.TabIndex = 1;
+            this.button_Pridat_Skupiny.Text = "Přidat skupiny";
+            this.button_Pridat_Skupiny.UseVisualStyleBackColor = true;
+            this.button_Pridat_Skupiny.Click += new System.EventHandler(this.button_Pridat_Skupiny_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(165, 41);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(85, 62);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Změna počtu studentů u skupiny";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form_Seznam_Skupin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(255, 168);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button_Pridat_Skupiny);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form_Seznam_Skupin";
@@ -88,5 +100,6 @@
         private System.Windows.Forms.Button button_Pridat_Skupiny;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Zkratka;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -18,10 +18,11 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.Init();
         }
 
+
         private void Init()
         {
             String lala = @"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
-        Directory.GetCurrentDirectory() + @"\Database.mdf;" +
+        System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString() + @"\Database.mdf;" +
         @"Integrated Security=True;Connect Timeout=30;User Instance=False";
             this.conn = new SqlConnection(lala);
         }
@@ -60,6 +61,56 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 catch (SqlException e)
                 {
                     MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+
+            }
+        }
+
+        internal DataTable getPracovniStitekDleSkup(int idSkupina)
+        {
+            DataTable dtDatabases = new DataTable();
+            conn.Open();
+
+            string where = string.Empty;
+            if (idSkupina != -1)
+                where = " WHERE Id = '" + idSkupina + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Predmet" + where, conn);
+            // int result = command.ExecuteNonQuery();
+
+            {
+                var adapter = new System.Data.SqlClient.SqlDataAdapter(command);
+                var DataTable = new DataTable();
+                adapter.Fill(dtDatabases);
+
+            }
+
+            conn.Close();
+
+            return dtDatabases;
+        }
+
+        internal void updateStitekStudent(int idStitek, int pocetStudentuNew)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE Pracovni_Stitek SET Pocet_Student = '" + pocetStudentuNew + "' WHERE Id = '" + idStitek + "'";
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při update hodnot u skupiny: " + e.Message);
                 }
                 finally
                 {
@@ -301,12 +352,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
-        public DataTable getPredmet()
+        public DataTable getPredmet(int Id = -1)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Predmet", conn);
+            string where = string.Empty;
+            if (Id != -1)
+                where =" WHERE Id = '" + Id + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Predmet" + where, conn);
             // int result = command.ExecuteNonQuery();
 
             {
@@ -321,13 +376,62 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             return dtDatabases;
         }
 
-        public void setPredmet(string Zkratka, int Pocet_Tydnu, int Hodin_Prednasek, int Hodin_Seminar, int Hodin_Cviceni, int Zpusob_Zakonceni, int Jazyk, int Velikost_Tridy, int Seznam_Skupin)
+        public DataTable getPredmetDleSkupiny(int IdSkupina = -1)
+        {
+            DataTable dtDatabases = new DataTable();
+            conn.Open();
+
+            string where = string.Empty;
+            if (IdSkupina != -1)
+                where = " WHERE Skupina = '" + IdSkupina + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Predmet" + where, conn);
+            // int result = command.ExecuteNonQuery();
+
+            {
+                var adapter = new System.Data.SqlClient.SqlDataAdapter(command);
+                adapter.Fill(dtDatabases);
+
+            }
+
+            conn.Close();
+
+            return dtDatabases;
+        }
+
+        public DataTable getPracovniStitkyDlePredmetu(int IdPredmet = -1)
+        {
+            DataTable dtDatabases = new DataTable();
+            conn.Open();
+
+            string where = string.Empty;
+            if (IdPredmet != -1)
+                where = " WHERE Predmet = '" + IdPredmet + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Pracovni_Stitek" + where, conn);
+            // int result = command.ExecuteNonQuery();
+
+            {
+                var adapter = new System.Data.SqlClient.SqlDataAdapter(command);
+                adapter.Fill(dtDatabases);
+
+            }
+
+            conn.Close();
+
+            return dtDatabases;
+        }
+
+        public int setPredmet(string Zkratka, int Pocet_Tydnu, int Hodin_Prednasek, int Hodin_Seminar, int Hodin_Cviceni, int Zpusob_Zakonceni, int Jazyk, int Velikost_Tridy, int Seznam_Skupin)
         {
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = this.conn;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "INSERT into Predmet (Zkratka, Pocet_Tydnu, Hodin_Prednasek, Hodin_Seminar, Zpusob_Zakonceni, Jazyk, Velikost_Tridy, Skupina, Hodin_Cviceni) VALUES (@Zkratka, @Pocet_Tydnu, @Hodin_Prednasek, @Hodin_Seminar, @Zpusob_Zakonceni, @Jazyk, @Velikost_Tridy, @Skupina, @Hodin_Cviceni)";
+                command.CommandText = "INSERT into Predmet " +
+                    "(Zkratka, Pocet_Tydnu, Hodin_Prednasek, Hodin_Seminar, Zpusob_Zakonceni, Jazyk, Velikost_Tridy, Skupina, Hodin_Cviceni) " +
+                    "output inserted.Id " +
+                    " VALUES (@Zkratka, @Pocet_Tydnu, @Hodin_Prednasek, @Hodin_Seminar, @Zpusob_Zakonceni, @Jazyk, @Velikost_Tridy, @Skupina, @Hodin_Cviceni)";
                 command.Parameters.AddWithValue("@Zkratka", Zkratka);
                 command.Parameters.AddWithValue("@Pocet_Tydnu", Pocet_Tydnu);
                 command.Parameters.AddWithValue("@Hodin_Prednasek", Hodin_Prednasek);
@@ -337,15 +441,18 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 command.Parameters.AddWithValue("@Velikost_Tridy", Velikost_Tridy);
                 command.Parameters.AddWithValue("@Skupina", Seznam_Skupin);
                 command.Parameters.AddWithValue("@Hodin_Cviceni", Hodin_Cviceni);
+                command.Parameters.Add("@Id", SqlDbType.Int).Direction = ParameterDirection.Output;
+
 
                 try
                 {
                     conn.Open();
-                    int recordsAffected = command.ExecuteNonQuery();
+                    return (int)command.ExecuteScalar();
                 }
                 catch (SqlException e)
                 {
                     MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+                    return -1;
                 }            
                 finally
                 {
@@ -360,8 +467,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
-
-            SqlCommand command = new SqlCommand(String.Format("Select * from Skupina WHERE Id='" + Id + "'"), conn);
+            string where = string.Empty;
+            if (Id != "")
+            where = " WHERE Id='" + Id + "'";
+            SqlCommand command = new SqlCommand(String.Format("Select * from Skupina" + where), conn);
             // int result = command.ExecuteNonQuery();
 
             {
@@ -373,6 +482,32 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             conn.Close();
 
             return dtDatabases;
+        }
+
+        public void setSkupinaZmenaStudent(string IdPredmetu, int pocetStudent)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE Skupina SET Pocet_Student = '" + pocetStudent + "' WHERE Id = '" + IdPredmetu + "'";
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při update hodnot u skupiny: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+
+            }
         }
 
         public void setSkupina(string Zkratka, int Rocnik, int Semestr, int Pocet_Student, int Forma_Studia, int Typ_Studia, int Jazyk)
@@ -515,9 +650,28 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             return count == 0 ? false : true;
         }
 
+        public enum TypStitek
+        {
+            Prednaska = 1,
+            Cviceni = 2,
+            Seminar = 3,
+            Zapocet = 4,
+            Klasifik_Zapoc = 7,
+            Zkouska = 8,
 
 
-        public void setPracovniStitek(string Zamestnanec, int Predmet, int Typ_Stitek, int Pocet_Student, int Pocet_Hodin, int Pocet_Tyden, int Jazyk, string nazev)
+        }
+
+        public enum TypJazyk
+        {
+            CZ = 1,
+        }
+
+        public void setPracovniStitek(
+            string Zamestnanec, int Predmet,
+            TypStitek Typ_Stitek, int Pocet_Student, 
+            int Pocet_Hodin, int Pocet_Tyden,
+            int Jazyk, string nazev)
         {
             using (SqlCommand command = new SqlCommand())
             {
@@ -530,11 +684,11 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 else
                     command.Parameters.AddWithValue("@Zamestnanec", Zamestnanec);
                 command.Parameters.AddWithValue("@Predmet", Predmet);
-                command.Parameters.AddWithValue("@Typ_Stitek", Typ_Stitek);
+                command.Parameters.AddWithValue("@Typ_Stitek", (int)Typ_Stitek);
                 command.Parameters.AddWithValue("@Pocet_Student", Pocet_Student);
                 command.Parameters.AddWithValue("@Pocet_Hodin", Pocet_Hodin);
                 command.Parameters.AddWithValue("@Pocet_Tyden", Pocet_Tyden);
-                command.Parameters.AddWithValue("@Jazyk", Jazyk);
+                command.Parameters.AddWithValue("@Jazyk", (int)Jazyk);
                 command.Parameters.AddWithValue("@nazev", nazev);
 
                 try
@@ -564,6 +718,35 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 command.CommandType = CommandType.Text;
                 command.CommandText = "UPDATE Pracovni_Stitek SET Zamestnanec = @Zamestnanec WHERE Id = @Id";
                 command.Parameters.AddWithValue("@Zamestnanec", Zamestnanec);
+                command.Parameters.AddWithValue("@Id", Id_Predmet);
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                    ;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+
+            }
+        }
+
+        public void setPracovniStitekStudent(int Id_Predmet, int pocetStudentu)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE Pracovni_Stitek SET Pocet_Student = @Pocet_Student WHERE Id = @Id";
+                command.Parameters.AddWithValue("@Pocet_Student", pocetStudentu);
                 command.Parameters.AddWithValue("@Id", Id_Predmet);
 
                 try

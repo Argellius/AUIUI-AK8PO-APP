@@ -51,5 +51,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // Show the settings form
             settingsForm.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

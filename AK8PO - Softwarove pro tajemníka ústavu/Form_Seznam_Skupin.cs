@@ -13,6 +13,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
     public partial class Form_Seznam_Skupin : Form
     {
         Database_Tool dt;
+        DataTable tableSkupiny;
         public Form_Seznam_Skupin()
         {
             InitializeComponent();
@@ -29,12 +30,12 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
         }
 
-        private void Form_Seznam_Skupin_Load(object sender, EventArgs e)
+        public void Form_Seznam_Skupin_Load(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            DataTable dbtable = dt.getSkupina();
+            tableSkupiny = dt.getSkupina();
             int i = 0;
-            foreach (DataRow dr in dbtable.Rows)
+            foreach (DataRow dr in tableSkupiny.Rows)
             {
 
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[i++].Clone();
@@ -46,6 +47,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 dataGridView1.Rows.Add(row);
             }
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form_PocetStudentuSkupina form = new Form_PocetStudentuSkupina();
+            form.Init(Convert.ToInt32(tableSkupiny.Rows[0].ItemArray[this.dataGridView1.SelectedRows[0].Index]), this);
+            form.Show();
         }
     }
 }

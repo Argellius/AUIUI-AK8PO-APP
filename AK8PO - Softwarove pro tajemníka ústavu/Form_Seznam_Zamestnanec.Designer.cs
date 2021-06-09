@@ -39,7 +39,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(163, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 39);
+            this.button1.Size = new System.Drawing.Size(86, 39);
             this.button1.TabIndex = 3;
             this.button1.Text = "Přidat zaměstnance";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,7 +71,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(266, 159);
+            this.ClientSize = new System.Drawing.Size(279, 159);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form_Seznam_Zamestnanec";
