@@ -79,27 +79,28 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 if (this.pocetStudent > pocetStudentuNew) //ÚBYTEK STUDENTŮ!!
                 {
                     int ubytek = this.pocetStudent - pocetStudentuNew;
-                    foreach (DataRow row in dt_PracovniStitky.Rows)
+                    //foreach (DataRow row in dt_PracovniStitky.Rows)
+                    //{
+                    //    if (Convert.ToInt32(row.ItemArray[3]) == (int)TypStitek.Prednaska)
+                    //        this.DB_Data.updateStitekStudent(Convert.ToInt32(row.ItemArray[0]), pocetStudentuNew);
+
+                    for (int i = dt_PracovniStitky.Rows.Count - 1; i != 0; i--)
                     {
-                        if (Convert.ToInt32(row.ItemArray[3]) == (int)TypStitek.Prednaska)
-                            this.DB_Data.updateStitekStudent(Convert.ToInt32(row.ItemArray[0]), pocetStudentuNew);
+                        if (Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[3]) == (int)TypStitek.Prednaska)
+                            this.DB_Data.updateStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[0]), pocetStudentuNew);
 
-                        for (int i = dt_PracovniStitky.Rows.Count; i != 0; i--)
+                        if (Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[4]) <= ubytek)
                         {
-                            if (Convert.ToInt32(row.ItemArray[3]) == (int)TypStitek.Prednaska)
-                                continue;
-
-                            if (Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[4]) <= ubytek)
-                            {
-                                DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[0]), 0);
-                                ubytek -= Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[4]);
-                            }
-                            else
-                            {
-                                DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[0]), Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[4]) - ubytek);
-                            }
+                            DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[0]), 0);
+                            ubytek -= Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[4]);
+                        }
+                        else
+                        {
+                            DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[0]), Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[4]) - ubytek);
+                            break;
                         }
                     }
+                    //                    }
 
                 }
                 else //NÁRŮSTEK STUDENTŮ - provede se normálně vygenerování štítků pomocí počet studentůnew a velikost třídy, existující cvičení se updatnou a další se přidají
@@ -125,6 +126,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                                     Convert.ToInt32(dt_Predmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dt_Predmet.Rows[0]["Pocet_Tydnu"]), Convert.ToInt32(dt_Predmet.Rows[0]["Jazyk"]),
                                     dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1]
                                     );
+                                pocetStitku--;
                             }
                             else
                                 break;
@@ -136,12 +138,12 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                         int pocetStitku = Convert.ToInt32(Math.Ceiling(pocetStudentuNew / Convert.ToDouble(dt_Predmet.Rows[0]["Velikost_Tridy"])));
                         //Počet studentů vydělím počtem štítků a tento počet nakonec odečtu od počtu studentů u posledního štítku, tj. druhé volání vygenerování počet stítků
                         int pocetStudentuNaStitku = (int)Math.Ceiling(pocetStudentuNew / (double)pocetStitku);
-                        int posledniStitekPocetStudent = (pocetStitku * pocetStudentuNaStitku) - pocetStudentuNew;
+                        int posledniStitekPocetStudent = (pocetStudentuNew - ((pocetStitku-1) * pocetStudentuNaStitku) == 0) ? pocetStudentuNaStitku : pocetStudentuNew - ((pocetStitku - 1 ) * pocetStudentuNaStitku);
 
                         for (int i = 0; i < dt_PracovniStitky.Rows.Count; i++)
                         {
                             if (Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[3]) == (int)TypStitek.Prednaska)
-                                continue;
+                                this.DB_Data.updateStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[0]), pocetStudentuNew);
                             if (Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[3]) == (int)TypStitek.Cviceni)
                             {
                                 this.DB_Data.updateStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i].ItemArray[0]), pocetStudentuNaStitku);
@@ -156,6 +158,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                                                                    Convert.ToInt32(dt_Predmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dt_Predmet.Rows[0]["Pocet_Tydnu"]), Convert.ToInt32(dt_Predmet.Rows[0]["Jazyk"]),
                                                                    dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1]
                                                                    );
+                                pocetStitku--;
                             }
                             else if (pocetStitku > 0)
                             {
@@ -163,6 +166,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                                     Convert.ToInt32(dt_Predmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dt_Predmet.Rows[0]["Pocet_Tydnu"]), Convert.ToInt32(dt_Predmet.Rows[0]["Jazyk"]),
                                     dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1]
                                     );
+                                pocetStitku--;
                             }
                             else
                                 break;
