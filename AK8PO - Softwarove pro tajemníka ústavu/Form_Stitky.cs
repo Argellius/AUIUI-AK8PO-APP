@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AK8PO___Softwarove_pro_tajemníka_ústavu.Database_Tool;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
@@ -30,14 +31,31 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 DataGridViewRow row = (DataGridViewRow)dataGridView_Stitek.Rows[i++].Clone();
                 row.Cells[0].Value = Convert.ToInt32(dr.ItemArray[0]);
                 row.Cells[1].Value = dr.ItemArray[8];
-                row.Cells[2].Value = dt.getNazevTypStitek(Convert.ToInt32(dr.ItemArray[3]));
+                row.Cells[3].Value = dt.getNazevTypStitek(Convert.ToInt32(dr.ItemArray[3]));
+                row.Cells[4].Value = dt.getPredmet(Convert.ToInt32(dr.ItemArray[2])).Rows[0].ItemArray[1];
+                row.Cells[5].Value = dr.ItemArray[4];
+                row.Cells[6].Value = dr.ItemArray[5];
+                row.Cells[7].Value = dr.ItemArray[6];
+                row.Cells[8].Value = dt.getJazyk(Convert.ToInt32(dr.ItemArray[7])).Rows[0].ItemArray[1];
+                row.Cells[9].Value = this.GetBodyZaStitek(Convert.ToInt32(dr.ItemArray[3]),
+                    Convert.ToInt32(dr.ItemArray[7]),
+                    Convert.ToDouble(dr.ItemArray[5]));
+              
                 if (dr.ItemArray[1].ToString() != string.Empty)
-                    row.Cells[3].Value = dt.getZamestnanecJmeno(Convert.ToInt32(dr.ItemArray[1]));
+                    row.Cells[2].Value = dt.getZamestnanecJmeno(Convert.ToInt32(dr.ItemArray[1]));
                 dataGridView_Stitek.Rows.Add(row);
             }
 
 
 
+        }
+
+        private double GetBodyZaStitek(int typ_stitku, int jazyk, double hodina)
+        {
+            TypStitek typ = (TypStitek)typ_stitku;
+            Uvazky uvazky = new Uvazky();
+
+            return uvazky.getBody(typ, (TypJazyk)jazyk, hodina);
         }
 
         private void button_Vygenerovat_Click(object sender, EventArgs e)

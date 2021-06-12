@@ -27,12 +27,33 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.conn = new SqlConnection(lala);
         }
 
-        public DataTable getJazyk()
+        internal DataTable getPracovniStitekNJZamestnanec(int v = -1)
+        {
+            DataTable dtDatabases = new DataTable();
+            conn.Open();
+            string where = string.Empty;
+            if (v != -1)
+                where = " WHERE Zamestnanec.Id ='" + v + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Pracovni_Stitek JOIN Zamestnanec ON Pracovni_Stitek.Zamestnanec=Zamestnanec.Id" + where, conn);
+            // int result = command.ExecuteNonQuery();
+            var adapter = new System.Data.SqlClient.SqlDataAdapter(command);
+            adapter.Fill(dtDatabases);
+            conn.Close();
+
+            return dtDatabases;
+        }
+
+        public DataTable getJazyk(int id = -1)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Jazyk", conn);
+            string where = string.Empty;
+            if (id != -1)
+                where = " WHERE Id ='" + id + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Jazyk" + where, conn);
             // int result = command.ExecuteNonQuery();
 
             var adapter = new System.Data.SqlClient.SqlDataAdapter(command);
@@ -121,12 +142,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
-        public DataTable getFormaStudia()
+        public DataTable getFormaStudia(int id = -1)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Forma_Studia", conn);
+            string where = string.Empty;
+            if (id != -1)
+                where = " WHERE Id ='" + id + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Forma_Studia" + where, conn);
             // int result = command.ExecuteNonQuery();
             var adapter = new System.Data.SqlClient.SqlDataAdapter(command);
             adapter.Fill(dtDatabases);
@@ -165,12 +190,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         }
 
 
-        public DataTable getSemestr()
+        public DataTable getSemestr(int id = -1)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Semestr", conn);
+            string where = string.Empty;
+            if (id != -1)
+                where = " WHERE Id ='" + id + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Semestr" + where, conn);
             // int result = command.ExecuteNonQuery();
 
             {
@@ -259,12 +288,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
-        public DataTable getTypStudia()
+        public DataTable getTypStudia(int id = -1)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Typ_Studia", conn);
+            string where = string.Empty;
+            if (id != -1)
+                where = " WHERE Id ='" + id + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Typ_Studia" + where, conn);
             // int result = command.ExecuteNonQuery();
 
             {
@@ -305,12 +338,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
-        public DataTable getZpusobZakonceni()
+        public DataTable getZpusobZakonceni(int id = -1)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Zpusob_Zakonceni", conn);
+            string where = string.Empty;
+            if (id != -1)
+                where = " WHERE Id ='" + id + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Zpusob_Zakonceni" + where, conn);
             // int result = command.ExecuteNonQuery();
 
             {
@@ -421,6 +458,49 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             return dtDatabases;
         }
+
+        public void setPredmet(int id, string Zkratka, int Pocet_Tydnu, int Hodin_Prednasek, int Hodin_Seminar, int Hodin_Cviceni, int Zpusob_Zakonceni, int Jazyk, int Velikost_Tridy, int Seznam_Skupin)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                //command.CommandText = "UPDATE Pracovni_Stitek SET Pocet_Student = @Pocet_Student WHERE Id = @Id";
+                command.CommandText = "UPDATE Predmet SET Zkratka = @Zkratka, Pocet_Tydnu = @Pocet_Tydnu, Hodin_Prednasek = @Hodin_Prednasek," +
+                    "Hodin_Seminar = @Hodin_Seminar, Zpusob_Zakonceni = @Zpusob_Zakonceni, Jazyk = @Jazyk," +
+                    "Velikost_Tridy = @Velikost_Tridy, Skupina = @Skupina, Hodin_Cviceni = @Hodin_Cviceni" +
+                    "  WHERE Id = @Id";
+                
+                command.Parameters.AddWithValue("@Zkratka", Zkratka);
+                command.Parameters.AddWithValue("@Pocet_Tydnu", Pocet_Tydnu);
+                command.Parameters.AddWithValue("@Hodin_Prednasek", Hodin_Prednasek);
+                command.Parameters.AddWithValue("@Hodin_Seminar", Hodin_Seminar);
+                command.Parameters.AddWithValue("@Zpusob_Zakonceni", Zpusob_Zakonceni);
+                command.Parameters.AddWithValue("@Jazyk", Jazyk);
+                command.Parameters.AddWithValue("@Velikost_Tridy", Velikost_Tridy);
+                command.Parameters.AddWithValue("@Skupina", Seznam_Skupin);
+                command.Parameters.AddWithValue("@Hodin_Cviceni", Hodin_Cviceni);
+                command.Parameters.AddWithValue("@Id", id);
+
+                try
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+                    
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+
+            }
+        }
+
 
         public int setPredmet(string Zkratka, int Pocet_Tydnu, int Hodin_Prednasek, int Hodin_Seminar, int Hodin_Cviceni, int Zpusob_Zakonceni, int Jazyk, int Velikost_Tridy, int Seznam_Skupin)
         {
@@ -665,6 +745,8 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         public enum TypJazyk
         {
             CZ = 1,
+
+            ENG = 2,
         }
 
         public void setPracovniStitek(
@@ -739,7 +821,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
-        public void setPracovniStitekStudent(int Id_Predmet, int pocetStudentu)
+        public void setPracovniStitekStudent(int Id, int pocetStudentu)
         {
             using (SqlCommand command = new SqlCommand())
             {
@@ -747,7 +829,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 command.CommandType = CommandType.Text;
                 command.CommandText = "UPDATE Pracovni_Stitek SET Pocet_Student = @Pocet_Student WHERE Id = @Id";
                 command.Parameters.AddWithValue("@Pocet_Student", pocetStudentu);
-                command.Parameters.AddWithValue("@Id", Id_Predmet);
+                command.Parameters.AddWithValue("@Id", Id);
 
                 try
                 {

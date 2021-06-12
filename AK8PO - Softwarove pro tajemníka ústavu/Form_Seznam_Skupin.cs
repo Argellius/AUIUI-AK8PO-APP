@@ -41,6 +41,12 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[i++].Clone();
                 row.Cells[0].Value = Convert.ToInt32(dr.ItemArray[0]);
                 row.Cells[1].Value = dr.ItemArray[1];
+                row.Cells[2].Value = dr.ItemArray[2];
+                row.Cells[3].Value = dt.getSemestr(Convert.ToInt32(dr.ItemArray[3])).Rows[0].ItemArray[1];
+                row.Cells[4].Value = dr.ItemArray[4];
+                row.Cells[5].Value = dt.getFormaStudia(Convert.ToInt32(dr.ItemArray[5])).Rows[0].ItemArray[1];
+                row.Cells[6].Value = dt.getTypStudia(Convert.ToInt32(dr.ItemArray[6])).Rows[0].ItemArray[1]; ;
+                row.Cells[7].Value = dt.getJazyk(Convert.ToInt32(dr.ItemArray[7])).Rows[0].ItemArray[1];
                 //row.Cells[2].Value = dt.getNazevTypStitek(Convert.ToInt32(dr.ItemArray[3]));
                 //if (dr.ItemArray[1].ToString() != string.Empty)
                 //    row.Cells[3].Value = dt.getZamestnanecJmeno(Convert.ToInt32(dr.ItemArray[1]));
@@ -51,6 +57,12 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (this.dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Nejprve vyber řádek");
+                return;
+            }
+
             Form_PocetStudentuSkupina form = new Form_PocetStudentuSkupina();
             form.Init(Convert.ToInt32(tableSkupiny.Rows[0].ItemArray[this.dataGridView1.SelectedRows[0].Index]), this);
             form.Show();

@@ -29,12 +29,18 @@
         private void InitializeComponent()
         {
             this.dataGridView_Stitek = new System.Windows.Forms.DataGridView();
-            this.Column_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Nazev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_Typ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column_zamestnanec = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Vygenerovat = new System.Windows.Forms.Button();
             this.button_Priradit = new System.Windows.Forms.Button();
+            this.Column_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Nazev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Zamestnanec = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Typ_Stitek = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Predmet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Pocet_Student = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Pocet_Hodin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Pocet_Tyden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Jazyk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Stitek)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,12 +50,38 @@
             this.dataGridView_Stitek.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column_Id,
             this.Column_Nazev,
-            this.Column_Typ,
-            this.Column_zamestnanec});
+            this.Column_Zamestnanec,
+            this.Column_Typ_Stitek,
+            this.Column_Predmet,
+            this.Column_Pocet_Student,
+            this.Column_Pocet_Hodin,
+            this.Column_Pocet_Tyden,
+            this.Column_Jazyk,
+            this.Column_Body});
             this.dataGridView_Stitek.Location = new System.Drawing.Point(12, 12);
             this.dataGridView_Stitek.Name = "dataGridView_Stitek";
-            this.dataGridView_Stitek.Size = new System.Drawing.Size(346, 150);
+            this.dataGridView_Stitek.Size = new System.Drawing.Size(946, 210);
             this.dataGridView_Stitek.TabIndex = 0;
+            // 
+            // button_Vygenerovat
+            // 
+            this.button_Vygenerovat.Location = new System.Drawing.Point(964, 11);
+            this.button_Vygenerovat.Name = "button_Vygenerovat";
+            this.button_Vygenerovat.Size = new System.Drawing.Size(140, 23);
+            this.button_Vygenerovat.TabIndex = 1;
+            this.button_Vygenerovat.Text = "Vygenerovat štítky";
+            this.button_Vygenerovat.UseVisualStyleBackColor = true;
+            this.button_Vygenerovat.Click += new System.EventHandler(this.button_Vygenerovat_Click);
+            // 
+            // button_Priradit
+            // 
+            this.button_Priradit.Location = new System.Drawing.Point(964, 41);
+            this.button_Priradit.Name = "button_Priradit";
+            this.button_Priradit.Size = new System.Drawing.Size(139, 34);
+            this.button_Priradit.TabIndex = 2;
+            this.button_Priradit.Text = "Přiřadit štítek k zaměstnanci";
+            this.button_Priradit.UseVisualStyleBackColor = true;
+            this.button_Priradit.Click += new System.EventHandler(this.button_Priradit_Click);
             // 
             // Column_Id
             // 
@@ -62,41 +94,51 @@
             this.Column_Nazev.HeaderText = "Název";
             this.Column_Nazev.Name = "Column_Nazev";
             // 
-            // Column_Typ
+            // Column_Zamestnanec
             // 
-            this.Column_Typ.HeaderText = "Typ";
-            this.Column_Typ.Name = "Column_Typ";
+            this.Column_Zamestnanec.HeaderText = "Zaměstnanec";
+            this.Column_Zamestnanec.Name = "Column_Zamestnanec";
             // 
-            // Column_zamestnanec
+            // Column_Typ_Stitek
             // 
-            this.Column_zamestnanec.HeaderText = "Zaměstnanec";
-            this.Column_zamestnanec.Name = "Column_zamestnanec";
+            this.Column_Typ_Stitek.HeaderText = "Typ";
+            this.Column_Typ_Stitek.Name = "Column_Typ_Stitek";
             // 
-            // button_Vygenerovat
+            // Column_Predmet
             // 
-            this.button_Vygenerovat.Location = new System.Drawing.Point(364, 12);
-            this.button_Vygenerovat.Name = "button_Vygenerovat";
-            this.button_Vygenerovat.Size = new System.Drawing.Size(140, 23);
-            this.button_Vygenerovat.TabIndex = 1;
-            this.button_Vygenerovat.Text = "Vygenerovat štítky";
-            this.button_Vygenerovat.UseVisualStyleBackColor = true;
-            this.button_Vygenerovat.Click += new System.EventHandler(this.button_Vygenerovat_Click);
+            this.Column_Predmet.HeaderText = "Předmět";
+            this.Column_Predmet.Name = "Column_Predmet";
             // 
-            // button_Priradit
+            // Column_Pocet_Student
             // 
-            this.button_Priradit.Location = new System.Drawing.Point(365, 42);
-            this.button_Priradit.Name = "button_Priradit";
-            this.button_Priradit.Size = new System.Drawing.Size(139, 34);
-            this.button_Priradit.TabIndex = 2;
-            this.button_Priradit.Text = "Přiřadit štítek k zaměstnanci";
-            this.button_Priradit.UseVisualStyleBackColor = true;
-            this.button_Priradit.Click += new System.EventHandler(this.button_Priradit_Click);
+            this.Column_Pocet_Student.HeaderText = "Počet studentů";
+            this.Column_Pocet_Student.Name = "Column_Pocet_Student";
+            // 
+            // Column_Pocet_Hodin
+            // 
+            this.Column_Pocet_Hodin.HeaderText = "Počet hodin";
+            this.Column_Pocet_Hodin.Name = "Column_Pocet_Hodin";
+            // 
+            // Column_Pocet_Tyden
+            // 
+            this.Column_Pocet_Tyden.HeaderText = "Počet týdnů";
+            this.Column_Pocet_Tyden.Name = "Column_Pocet_Tyden";
+            // 
+            // Column_Jazyk
+            // 
+            this.Column_Jazyk.HeaderText = "Jazyk";
+            this.Column_Jazyk.Name = "Column_Jazyk";
+            // 
+            // Column_Body
+            // 
+            this.Column_Body.HeaderText = "Body";
+            this.Column_Body.Name = "Column_Body";
             // 
             // Form_Stitky
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 171);
+            this.ClientSize = new System.Drawing.Size(1106, 234);
             this.Controls.Add(this.button_Priradit);
             this.Controls.Add(this.button_Vygenerovat);
             this.Controls.Add(this.dataGridView_Stitek);
@@ -111,11 +153,17 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView_Stitek;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Nazev;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Typ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column_zamestnanec;
         private System.Windows.Forms.Button button_Vygenerovat;
         private System.Windows.Forms.Button button_Priradit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Nazev;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Zamestnanec;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Typ_Stitek;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Predmet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Pocet_Student;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Pocet_Hodin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Pocet_Tyden;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Jazyk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Body;
     }
 }

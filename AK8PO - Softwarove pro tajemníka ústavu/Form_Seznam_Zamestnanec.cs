@@ -7,29 +7,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AK8PO___Softwarove_pro_tajemníka_ústavu.Database_Tool;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
     public partial class Form_Seznam_Zamestnanec : Form
     {
-        Database_Tool dt;
+        Database_Tool DB_Data;
         public Form_Seznam_Zamestnanec()
         {
             InitializeComponent();
-            dt = new Database_Tool();
+            DB_Data = new Database_Tool();
         }
 
         private void Form_Seznam_Zamestnanec_Load(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            DataTable dbtable = dt.getZamestnanec();
+            DataTable dbtable = DB_Data.getZamestnanec();
             int i = 0;
+            Uvazky uvazky = new Uvazky();
             foreach (DataRow dr in dbtable.Rows)
             {
+
+                double body = 0;
+                DataTable dataTable = DB_Data.getPracovniStitekNJZamestnanec(Convert.ToInt32(dr.ItemArray[0]));
+                foreach (DataRow drSt in dataTable.Rows)
+                {
+                    body += uvazky.getBody(
+                        (TypStitek)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Typ_Stitek")],
+                        (TypJazyk)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Jazyk")],
+                        Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Pocet_Hodin")])
+                        );
+
+                }
 
                 DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[i++].Clone();
                 row.Cells[0].Value = Convert.ToInt32(dr.ItemArray[0]);
                 row.Cells[1].Value = dr.ItemArray[1].ToString() + " " + dr.ItemArray[2].ToString();
+                row.Cells[2].Value = dr.ItemArray[3];
+                row.Cells[3].Value = dr.ItemArray[4];
+                row.Cells[4].Value = (bool)dr.ItemArray[5] ? "Ano" : "Ne";
+                row.Cells[5].Value = dr.ItemArray[6];
+
+
+                row.Cells[6].Value = body;
                 //row.Cells[2].Value = dt.getNazevTypStitek(Convert.ToInt32(dr.ItemArray[3]));
                 //if (dr.ItemArray[1].ToString() != string.Empty)
                 //    row.Cells[3].Value = dt.getZamestnanecJmeno(Convert.ToInt32(dr.ItemArray[1]));
