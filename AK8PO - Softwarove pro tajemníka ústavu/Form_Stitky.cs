@@ -53,7 +53,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         private double GetBodyZaStitek(int typ_stitku, int jazyk, double hodina)
         {
             TypStitek typ = (TypStitek)typ_stitku;
-            Uvazky uvazky = new Uvazky();
+            Uvazky uvazky = new Uvazky(true);
 
             return uvazky.getBody(typ, (TypJazyk)jazyk, hodina);
         }

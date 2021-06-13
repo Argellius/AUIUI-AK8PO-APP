@@ -25,7 +25,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             dataGridView1.Rows.Clear();
             DataTable dbtable = DB_Data.getZamestnanec();
             int i = 0;
-            Uvazky uvazky = new Uvazky();
+            Uvazky uvazky = new Uvazky(true);
             foreach (DataRow dr in dbtable.Rows)
             {
 
@@ -66,6 +66,37 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             // Show the settings form
             settingsForm.Show();
+        }
+
+        private void button_Export_CSV_Click(object sender, EventArgs e)
+        {
+            string lblFilePath = string.Empty;
+
+            using (FolderBrowserDialog dlg = new FolderBrowserDialog())
+            {
+                dlg.Description = "Select a folder";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    lblFilePath = dlg.SelectedPath;
+                }
+                else
+                    return;
+            }
+
+            var sb = new StringBuilder();
+
+            var headers = dataGridView1.Columns.Cast<DataGridViewColumn>();
+            sb.AppendLine(string.Join(",", headers.Select(column => "\"" + column.HeaderText + "\"").ToArray()));
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells[0].Value == null)
+                    break;
+                var cells = row.Cells.Cast<DataGridViewCell>();                                
+                sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
+            }            
+
+            System.IO.File.WriteAllText(lblFilePath + "exportZamestnance.csv", sb.ToString());
         }
     }
 }

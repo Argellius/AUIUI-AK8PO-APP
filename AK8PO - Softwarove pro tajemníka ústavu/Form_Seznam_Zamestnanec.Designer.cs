@@ -37,6 +37,7 @@
             this.Column_Doktorand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Ubazek = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_Export_CSV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,11 +103,22 @@
             this.Column_Body.HeaderText = "Body";
             this.Column_Body.Name = "Column_Body";
             // 
+            // button_Export_CSV
+            // 
+            this.button_Export_CSV.Location = new System.Drawing.Point(663, 57);
+            this.button_Export_CSV.Name = "button_Export_CSV";
+            this.button_Export_CSV.Size = new System.Drawing.Size(86, 39);
+            this.button_Export_CSV.TabIndex = 4;
+            this.button_Export_CSV.Text = "Export CSV";
+            this.button_Export_CSV.UseVisualStyleBackColor = true;
+            this.button_Export_CSV.Click += new System.EventHandler(this.button_Export_CSV_Click);
+            // 
             // Form_Seznam_Zamestnanec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(757, 159);
+            this.Controls.Add(this.button_Export_CSV);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form_Seznam_Zamestnanec";
@@ -128,5 +140,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Doktorand;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Ubazek;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Body;
+        private System.Windows.Forms.Button button_Export_CSV;
     }
 }

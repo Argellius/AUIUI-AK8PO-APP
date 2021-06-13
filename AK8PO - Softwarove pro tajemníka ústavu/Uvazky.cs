@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 using static AK8PO___Softwarove_pro_tajemníka_ústavu.Database_Tool;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
 
-    class Uvazky
+    public class Uvazky
     {
         public double Hodina_Prednaska_CZ { get; set; }
         public double Hodina_Cviceni_CZ { get; set; }
@@ -18,16 +21,28 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         public double Hodina_Cviceni_AJ { get; set; }
         public double Hodina_Seminare_AJ { get; set; }
 
+
         public Uvazky()
         {
-            this.Hodina_Prednaska_CZ = 1.8;
-            this.Hodina_Cviceni_CZ = 1.2;
-            this.Hodina_Seminare_CZ = 1.2;
 
-            this.Hodina_Prednaska_AJ = 2.4;
-            this.Hodina_Cviceni_AJ = 1.8;
-            this.Hodina_Seminare_AJ = 1.8;
+        }
 
+        public Uvazky(bool l)
+        {
+                Uvazky result;
+                var ser = new XmlSerializer(typeof(Uvazky));
+                using (var tr = new FileStream(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString() + @"\uvazky.xml", FileMode.Open))
+                {
+                    result = (Uvazky)ser.Deserialize(tr);
+                }
+        
+            this.Hodina_Prednaska_CZ = result.Hodina_Prednaska_CZ;
+            this.Hodina_Cviceni_CZ = result.Hodina_Cviceni_CZ;
+            this.Hodina_Seminare_CZ = result.Hodina_Seminare_CZ;
+
+            this.Hodina_Cviceni_AJ = result.Hodina_Cviceni_AJ;
+            this.Hodina_Prednaska_AJ = result.Hodina_Prednaska_AJ;            
+            this.Hodina_Seminare_AJ = result.Hodina_Seminare_AJ;
 
         }
 
