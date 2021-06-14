@@ -11,7 +11,7 @@ using static AK8PO___Softwarove_pro_tajemníka_ústavu.Database_Tool;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
-    public partial class Form_PocetStudentuSkupina : Form
+    public partial class Form_PocetStudentuSkupina : MetroFramework.Forms.MetroForm
     {
         Database_Tool DB_Data;
         private int IdSkupina;

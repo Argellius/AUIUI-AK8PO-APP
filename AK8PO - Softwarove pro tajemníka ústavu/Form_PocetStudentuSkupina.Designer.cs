@@ -38,7 +38,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // 
             // button_potvrdit
             // 
-            this.button_potvrdit.Location = new System.Drawing.Point(15, 83);
+            this.button_potvrdit.Location = new System.Drawing.Point(15, 90);
             this.button_potvrdit.Name = "button_potvrdit";
             this.button_potvrdit.Size = new System.Drawing.Size(231, 23);
             this.button_potvrdit.TabIndex = 0;
@@ -49,7 +49,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(118, 16);
+            this.textBox1.Location = new System.Drawing.Point(118, 23);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(128, 20);
             this.textBox1.TabIndex = 1;
@@ -57,7 +57,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // label_nazev
             // 
             this.label_nazev.AutoSize = true;
-            this.label_nazev.Location = new System.Drawing.Point(12, 19);
+            this.label_nazev.Location = new System.Drawing.Point(12, 26);
             this.label_nazev.Name = "label_nazev";
             this.label_nazev.Size = new System.Drawing.Size(83, 13);
             this.label_nazev.TabIndex = 2;
@@ -66,7 +66,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 50);
+            this.label1.Location = new System.Drawing.Point(12, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 3;
@@ -74,7 +74,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(118, 47);
+            this.textBox2.Location = new System.Drawing.Point(118, 54);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(128, 20);
             this.textBox2.TabIndex = 4;
@@ -83,14 +83,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(258, 117);
+            this.ClientSize = new System.Drawing.Size(258, 135);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_nazev);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button_potvrdit);
             this.Name = "Form_PocetStudentuSkupina";
-            this.Text = "Form_PocetStudentuPredmet";
             this.ResumeLayout(false);
             this.PerformLayout();
 

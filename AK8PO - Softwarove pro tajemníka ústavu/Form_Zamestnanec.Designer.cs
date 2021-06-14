@@ -45,7 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_Cele_Jmeno = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button_Pridat = new System.Windows.Forms.Button();
+            this.button_Pridat = new MetroFramework.Controls.MetroButton();
             this.textBox_Uvazek = new System.Windows.Forms.TextBox();
             this.textBox_Soukromy_Email = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -200,7 +200,7 @@
             this.button_Pridat.Size = new System.Drawing.Size(100, 23);
             this.button_Pridat.TabIndex = 61;
             this.button_Pridat.Text = "Přidat";
-            this.button_Pridat.UseVisualStyleBackColor = true;
+//            this.button_Pridat.UseVisualStyleBackColor = true;
             this.button_Pridat.Click += new System.EventHandler(this.button_Pridat_Click);
             // 
             // textBox_Uvazek
@@ -253,7 +253,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form_Zamestnanec";
-            this.Text = "Form_Zamestnanec";
             this.Load += new System.EventHandler(this.Form_Zamestnanec_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -278,7 +277,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox_Cele_Jmeno;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button_Pridat;
+        private MetroFramework.Controls.MetroButton button_Pridat;
         private System.Windows.Forms.TextBox textBox_Uvazek;
         private System.Windows.Forms.TextBox textBox_Soukromy_Email;
         private System.Windows.Forms.Label label5;

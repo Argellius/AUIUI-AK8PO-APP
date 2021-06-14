@@ -42,7 +42,7 @@
             this.comboBox_Forma_Studia = new System.Windows.Forms.ComboBox();
             this.comboBox_Typ_Studia = new System.Windows.Forms.ComboBox();
             this.comboBox_Jazyk = new System.Windows.Forms.ComboBox();
-            this.button_Pridat = new System.Windows.Forms.Button();
+            this.button_Pridat = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // label1
@@ -168,7 +168,7 @@
             this.button_Pridat.Size = new System.Drawing.Size(75, 23);
             this.button_Pridat.TabIndex = 14;
             this.button_Pridat.Text = "Přidat";
-            this.button_Pridat.UseVisualStyleBackColor = true;
+            //this.button_Pridat.UseVisualStyleBackColor = true;
             this.button_Pridat.Click += new System.EventHandler(this.button_Pridat_Click);
             // 
             // Form_Skupina
@@ -192,7 +192,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form_Skupina";
-            this.Text = "Form_Skupina";
             this.Load += new System.EventHandler(this.Form_Skupina_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -215,6 +214,6 @@
         private System.Windows.Forms.ComboBox comboBox_Forma_Studia;
         private System.Windows.Forms.ComboBox comboBox_Typ_Studia;
         private System.Windows.Forms.ComboBox comboBox_Jazyk;
-        private System.Windows.Forms.Button button_Pridat;
+        private MetroFramework.Controls.MetroButton button_Pridat;
     }
 }

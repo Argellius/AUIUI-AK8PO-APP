@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
-    public partial class Form_Seznam_Skupin : Form
+    public partial class Form_Seznam_Skupin : MetroFramework.Forms.MetroForm
     {
         Database_Tool dt;
         DataTable tableSkupiny;

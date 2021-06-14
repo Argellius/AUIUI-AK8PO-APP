@@ -11,7 +11,7 @@ using static AK8PO___Softwarove_pro_tajemníka_ústavu.Database_Tool;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
-    public partial class Form_Stitky : Form
+    public partial class Form_Stitky : MetroFramework.Forms.MetroForm
     {
         Database_Tool dt;
         public Form_Stitky()
@@ -79,8 +79,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             // Create a new instance of the Form2 class
             Form_Pridat_Zam_Stitek settingsForm = new Form_Pridat_Zam_Stitek(this);
-            settingsForm.InitValue(Convert.ToInt32(selectedRow.Cells[0].Value), Convert.ToString(selectedRow.Cells[1].Value), Convert.ToString(selectedRow.Cells[2].Value));
-            // Show the settings form
+            settingsForm.InitValue(Convert.ToInt32(selectedRow.Cells[0].Value), Convert.ToString(selectedRow.Cells[1].Value), Convert.ToString(selectedRow.Cells[3].Value), Convert.ToString(selectedRow.Cells[2].Value));            // Show the settings form
             settingsForm.Show(this);
         }
     }

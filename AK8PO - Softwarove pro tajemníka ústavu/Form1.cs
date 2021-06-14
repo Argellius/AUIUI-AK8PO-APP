@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroFramework.Forms.MetroForm
     {
         public Form1()
         {
@@ -52,6 +52,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // Show the settings form
             settingsForm.Show();
         }
-    
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
