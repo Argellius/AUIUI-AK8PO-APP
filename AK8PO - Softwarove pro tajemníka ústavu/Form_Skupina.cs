@@ -13,12 +13,18 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
     public partial class Form_Skupina : MetroFramework.Forms.MetroForm
     {
         Database_Tool dt;
+        Form_Seznam_Skupin parent;
         public Form_Skupina()
         {
             InitializeComponent();
             dt = new Database_Tool();
         }
 
+
+        public void Init(Form_Seznam_Skupin parent)
+        {
+            this.parent = parent;
+        }
         private void Form_Skupina_Load(object sender, EventArgs e)
         {
             DataTable dataT_jazyky = dt.getJazyk();
@@ -77,6 +83,8 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 (comboBox_Typ_Studia.SelectedItem as combobox_item).id, 
                 (comboBox_Jazyk.SelectedItem as combobox_item).id
                 );
+
+            parent.Form_Seznam_Skupin_Load(null, null);
         }
     }
 }

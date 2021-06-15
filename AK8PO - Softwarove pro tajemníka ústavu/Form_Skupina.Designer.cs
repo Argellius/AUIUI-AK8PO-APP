@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Skupina));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -168,7 +169,7 @@
             this.button_Pridat.Size = new System.Drawing.Size(75, 23);
             this.button_Pridat.TabIndex = 14;
             this.button_Pridat.Text = "Přidat";
-            //this.button_Pridat.UseVisualStyleBackColor = true;
+            this.button_Pridat.UseSelectable = true;
             this.button_Pridat.Click += new System.EventHandler(this.button_Pridat_Click);
             // 
             // Form_Skupina
@@ -191,6 +192,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Skupina";
             this.Load += new System.EventHandler(this.Form_Skupina_Load);
             this.ResumeLayout(false);

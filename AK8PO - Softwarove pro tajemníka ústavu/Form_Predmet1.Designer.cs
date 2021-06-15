@@ -44,9 +44,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.textBox_Velikost_Trida = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.comboBox_Seznam_Skupin = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.button_Pridat = new MetroFramework.Controls.MetroButton();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // comboBox_Zpusob_Zakonceni
@@ -179,14 +179,6 @@
             this.label12.TabIndex = 36;
             this.label12.Text = "Velikost třídy";
             // 
-            // comboBox_Seznam_Skupin
-            // 
-            this.comboBox_Seznam_Skupin.FormattingEnabled = true;
-            this.comboBox_Seznam_Skupin.Location = new System.Drawing.Point(181, 254);
-            this.comboBox_Seznam_Skupin.Name = "comboBox_Seznam_Skupin";
-            this.comboBox_Seznam_Skupin.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Seznam_Skupin.TabIndex = 39;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -198,21 +190,29 @@
             // 
             // button_Pridat
             // 
-            this.button_Pridat.Location = new System.Drawing.Point(181, 307);
+            this.button_Pridat.Location = new System.Drawing.Point(181, 332);
             this.button_Pridat.Name = "button_Pridat";
             this.button_Pridat.Size = new System.Drawing.Size(100, 23);
             this.button_Pridat.TabIndex = 40;
             this.button_Pridat.Text = "Přidat";
-          //  this.button_Pridat.UseVisualStyleBackColor = true;
+            this.button_Pridat.UseSelectable = true;
             this.button_Pridat.Click += new System.EventHandler(this.button_Pridat_Click);
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(181, 249);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(120, 64);
+            this.checkedListBox1.TabIndex = 41;
             // 
             // Form_Predmet1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 345);
+            this.ClientSize = new System.Drawing.Size(303, 387);
+            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.button_Pridat);
-            this.Controls.Add(this.comboBox_Seznam_Skupin);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.textBox_Velikost_Trida);
             this.Controls.Add(this.label12);
@@ -254,8 +254,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox_Velikost_Trida;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox_Seznam_Skupin;
         private System.Windows.Forms.Label label13;
         private MetroFramework.Controls.MetroButton button_Pridat;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }

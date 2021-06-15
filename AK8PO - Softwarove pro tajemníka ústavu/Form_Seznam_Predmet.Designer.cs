@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Seznam_Predmet));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.collumn_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Zkratka = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,6 +40,7 @@
             this.Column_Jazyk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Velikost_Tridy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Skupina = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_ixp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new MetroFramework.Controls.MetroButton();
             this.button_upravit = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -57,7 +59,8 @@
             this.Column_Zpusob_Zakonceni,
             this.Column_Jazyk,
             this.Column_Velikost_Tridy,
-            this.Column_Skupina});
+            this.Column_Skupina,
+            this.Column_ixp});
             this.dataGridView1.Location = new System.Drawing.Point(12, 26);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -144,6 +147,13 @@
             this.Column_Skupina.ReadOnly = true;
             this.Column_Skupina.Width = 71;
             // 
+            // Column_ixp
+            // 
+            this.Column_ixp.HeaderText = "ixp";
+            this.Column_ixp.Name = "Column_ixp";
+            this.Column_ixp.ReadOnly = true;
+            this.Column_ixp.Visible = false;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(836, 26);
@@ -172,6 +182,7 @@
             this.Controls.Add(this.button_upravit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Seznam_Predmet";
             this.Text = "Form_Seznam_Predmet";
             this.Load += new System.EventHandler(this.Form_Seznam_Predmet_Load);
@@ -184,6 +195,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private MetroFramework.Controls.MetroButton button1;
+        private MetroFramework.Controls.MetroButton button_upravit;
         private System.Windows.Forms.DataGridViewTextBoxColumn collumn_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Zkratka;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Pocet_Tydnu;
@@ -194,6 +206,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Jazyk;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Velikost_Tridy;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Skupina;
-        private MetroFramework.Controls.MetroButton button_upravit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_ixp;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Pridat_Zam_Stitek));
             this.button_Pridat = new MetroFramework.Controls.MetroButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -110,6 +111,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button_Pridat);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Pridat_Zam_Stitek";
             this.Load += new System.EventHandler(this.Form_Pridat_Zam_Stitek_Load);
             this.ResumeLayout(false);

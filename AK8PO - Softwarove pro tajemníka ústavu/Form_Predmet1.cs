@@ -18,7 +18,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
     {
         Database_Tool DB_Data;
         Form_Seznam_Predmet _parent;
-        int id = -99;
+        int Id_Predmet = -99;
+        private string ixp;
+        private DataTable skupinyUPredmetu;
+
         public Form_Predmet1(Form_Seznam_Predmet parent)
         {
             _parent = parent;
@@ -52,45 +55,109 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             foreach (DataRow dr in dataT_skupiny.Rows)
             {
-                col_skupiny.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), nazev = dr.ItemArray[1].ToString().Trim(), zkratka = null });
-
+                //col_skupiny.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), nazev = dr.ItemArray[1].ToString().Trim(), zkratka = null });
+                checkedListBox1.Items.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), nazev = dr.ItemArray[1].ToString().Trim(), zkratka = null });
             }
 
             //Zdroje comboboxů
             comboBox_Jazyk.DataSource = col_jazyky;
             comboBox_Zpusob_Zakonceni.DataSource = col_způsob_zakonceni;
-            comboBox_Seznam_Skupin.DataSource = col_skupiny;
+            //comboBox_Seznam_Skupin.DataSource = col_skupiny;
 
             //Select default empty value
             comboBox_Jazyk.SelectedIndex = -1;
             comboBox_Zpusob_Zakonceni.SelectedIndex = -1;
-            comboBox_Seznam_Skupin.SelectedIndex = -1;
+            //comboBox_Seznam_Skupin.SelectedIndex = -1;
 
         }
 
         private void button_Pridat_Click(object sender, EventArgs e)
         {
-            if (id != -99)
+            if (Id_Predmet != -99)
             {
-                DB_Data.setPredmet(id,
-                    textBox_Zkratka.Text.ToString(),
-                    Convert.ToInt32(textBox_Pocet_Tyden.Text),
-                    Convert.ToInt32(textBox_Pocet_Hodin_Prednasek.Text),
-                    Convert.ToInt32(textBox_Pocet_Hodin_Seminar.Text),
-                    Convert.ToInt32(textBox_Pocet_Hodin_Cviceni.Text),
-                    (comboBox_Zpusob_Zakonceni.SelectedItem as combobox_item).id,
-                    (comboBox_Jazyk.SelectedItem as combobox_item).id,
-                    Convert.ToInt32(textBox_Velikost_Trida.Text),
-                    (comboBox_Seznam_Skupin.SelectedItem as combobox_item).id);
+                DataTable predmet = DB_Data.getPredmet(Id_Predmet);
+                if (Convert.ToString(predmet.Rows[0]["Skupina"]).Trim() == String.Empty)
+                    DB_Data.DeletePredmet(Id_Predmet);
 
-                this.UpravaPocetStudentuUStitku((comboBox_Seznam_Skupin.SelectedItem as combobox_item).id, this.id);
+                DB_Data.updatePredmetByIXP(
+                    this.ixp,
+                          textBox_Zkratka.Text.ToString(),
+                          Convert.ToInt32(textBox_Pocet_Tyden.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Prednasek.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Seminar.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Cviceni.Text),
+                          (comboBox_Zpusob_Zakonceni.SelectedItem as combobox_item).id,
+                          (comboBox_Jazyk.SelectedItem as combobox_item).id,
+                          Convert.ToInt32(textBox_Velikost_Trida.Text)
+                          );
+
+                List<int> pred_skupiny = new List<int>();
+                List<int> aktual_skupiny = new List<int>();
+
+                foreach (var item in checkedListBox1.CheckedItems)
+                {
+                    aktual_skupiny.Add((item as combobox_item).id);
+                }
+                foreach (DataRow item in this.skupinyUPredmetu.Rows)
+                {
+                    pred_skupiny.Add(Convert.ToInt32(item.ItemArray[0]));
+                }
+
+                List<int> skupiny_smazat = pred_skupiny.Except(aktual_skupiny).ToList();
+                List<int> skupiny_pridat = aktual_skupiny.Except(pred_skupiny).ToList();
+
+                /*TODO*/
+                foreach (var item in skupiny_smazat)
+                {
+                    DB_Data.DeletePracovniStitek(this.Id_Predmet, item);
+                    DB_Data.DeletePredmetAndSkupina(this.ixp, item);
+
+                }
+
+
+                foreach (var item in skupiny_pridat)
+                {
+                    int id = DB_Data.setPredmet(
+                          textBox_Zkratka.Text.ToString(),
+                          Convert.ToInt32(textBox_Pocet_Tyden.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Prednasek.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Seminar.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Cviceni.Text),
+                          (comboBox_Zpusob_Zakonceni.SelectedItem as combobox_item).id,
+                          (comboBox_Jazyk.SelectedItem as combobox_item).id,
+                          Convert.ToInt32(textBox_Velikost_Trida.Text),
+                          item, this.ixp);
+
+                    this._vygenerovaniStitku(id, item);
+
+                }
+
+                if (skupiny_smazat.Count() == pred_skupiny.Count() && skupiny_pridat.Count() == 0)
+                    DB_Data.setPredmet(
+                          textBox_Zkratka.Text.ToString(),
+                          Convert.ToInt32(textBox_Pocet_Tyden.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Prednasek.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Seminar.Text),
+                          Convert.ToInt32(textBox_Pocet_Hodin_Cviceni.Text),
+                          (comboBox_Zpusob_Zakonceni.SelectedItem as combobox_item).id,
+                          (comboBox_Jazyk.SelectedItem as combobox_item).id,
+                          Convert.ToInt32(textBox_Velikost_Trida.Text), -99
+                          , this.ixp);
+
+                this._parent.Form_Seznam_Predmet_Load(this, null);
+                //this.UpravaPocetStudentuUStitku((comboBox_Seznam_Skupin.SelectedItem as combobox_item).id, this.id);
+                MessageBox.Show("Hotovo!");
+                this.Close();
                 return;
             }
 
 
             try
             {
-                int IdPredmet = DB_Data.setPredmet(
+                var ixp = Guid.NewGuid().ToString();
+                foreach (var item in checkedListBox1.CheckedItems)
+                {
+                    int IdPredmet = DB_Data.setPredmetGenerIXP(
                     textBox_Zkratka.Text.ToString(),
                     Convert.ToInt32(textBox_Pocet_Tyden.Text),
                     Convert.ToInt32(textBox_Pocet_Hodin_Prednasek.Text),
@@ -99,12 +166,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     (comboBox_Zpusob_Zakonceni.SelectedItem as combobox_item).id,
                     (comboBox_Jazyk.SelectedItem as combobox_item).id,
                     Convert.ToInt32(textBox_Velikost_Trida.Text),
-                    (comboBox_Seznam_Skupin.SelectedItem as combobox_item).id);
+                    (item as combobox_item).id, ixp);
+                    Thread.Sleep(100);
+                    this._vygenerovaniStitku(IdPredmet, (item as combobox_item).id);
+                    Thread.Sleep(100);
+                }
                 MessageBox.Show("Předmět přidán");
-                Thread.Sleep(100);
-                this._vygenerovaniStitku(IdPredmet);
                 MessageBox.Show("Štítky automaticky vygenerovány");
-                Thread.Sleep(100);
             }
             catch (Exception ex)
             {
@@ -114,45 +182,45 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this._parent.Form_Seznam_Predmet_Load(this, null);
         }
 
-        private void UpravaPocetStudentuUStitku(int IdSkupina, int IdPredmet)
-        {
-            DataTable dataSkupina = DB_Data.getSkupina((comboBox_Seznam_Skupin.SelectedItem as combobox_item).id.ToString());
-            DataTable dataPredmet = DB_Data.getPredmet(IdPredmet);
+        //private void UpravaPocetStudentuUStitku(int IdSkupina, int IdPredmet)
+        //{
+        //    DataTable dataSkupina = DB_Data.getSkupina((comboBox_Seznam_Skupin.SelectedItem as combobox_item).id.ToString());
+        //    DataTable dataPredmet = DB_Data.getPredmet(IdPredmet);
 
-            //Počet studentů vydělím velikostí třídy a zakorouhluji nahoru
-            int pocetStitku = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToDouble(dataPredmet.Rows[0]["Velikost_Tridy"])));
-            //Počet studentů vydělím počtem štítků a tento počet nakonec odečtu od počtu studentů u posledního štítku, tj. druhé volání vygenerování počet stítků
-            int pocetStudentuNaStitku = (int)Math.Ceiling(Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / (double)pocetStitku);
-            int posledniStitekPocetStudent = (pocetStitku * pocetStudentuNaStitku) - Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]);
-            //pocetStudentuNaStitku - posledniStitekPocetStudent
+        //    //Počet studentů vydělím velikostí třídy a zakorouhluji nahoru
+        //    int pocetStitku = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToDouble(dataPredmet.Rows[0]["Velikost_Tridy"])));
+        //    //Počet studentů vydělím počtem štítků a tento počet nakonec odečtu od počtu studentů u posledního štítku, tj. druhé volání vygenerování počet stítků
+        //    int pocetStudentuNaStitku = (int)Math.Ceiling(Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / (double)pocetStitku);
+        //    int posledniStitekPocetStudent = (pocetStitku * pocetStudentuNaStitku) - Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]);
+        //    //pocetStudentuNaStitku - posledniStitekPocetStudent
 
-            DataTable dt_PracovniStitky = new DataTable();
-            dt_PracovniStitky = DB_Data.getPracovniStitkyDlePredmetu(IdPredmet);
-            bool cviceni = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[9]) > 0 ? true: false;
-            if (cviceni)
-            {
-                int pocetStitkuCv = pocetStitku;
-                int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
-                int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
+        //    DataTable dt_PracovniStitky = new DataTable();
+        //    dt_PracovniStitky = DB_Data.getPracovniStitkyDlePredmetu(IdPredmet);
+        //    bool cviceni = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[9]) > 0 ? true : false;
+        //    if (cviceni)
+        //    {
+        //        int pocetStitkuCv = pocetStitku;
+        //        int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
+        //        int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
 
-                pregenerujStitku(TypStitek.Cviceni, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
-                
-                
-            }
-
-            bool seminar = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[4]) > 0 ? true : false;
-            if (seminar)
-            {
-                int pocetStitkuCv = pocetStitku;
-                int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
-                int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
-
-                pregenerujStitku(TypStitek.Seminar, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
-            }
+        //        pregenerujStitku(TypStitek.Cviceni, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
 
 
+        //    }
 
-        }
+        //    bool seminar = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[4]) > 0 ? true : false;
+        //    if (seminar)
+        //    {
+        //        int pocetStitkuCv = pocetStitku;
+        //        int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
+        //        int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
+
+        //        pregenerujStitku(TypStitek.Seminar, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
+        //    }
+
+
+
+        //}
 
         private void pregenerujStitku(TypStitek typ, int pocetStitku, int pocetStudentuNaStitku, int posledniStitekPocetStudent, DataTable dt_PracovniStitky, DataTable dataPredmet, DataTable dataSkupina)
         {
@@ -186,14 +254,14 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku,
                   Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                   (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                  pocetStitku - 1
+                  pocetStitku - 1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0])
                   );
 
 
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku - posledniStitekPocetStudent,
                     Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                     (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                    1
+                    1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0])
                     );
 
             }
@@ -202,9 +270,11 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         internal void Init(int id,
                 string zkratka, string pocet_tyden, string hodin_prednasek,
                 string hodin_cviceni, string hodin_seminar, string zpusob_zakonceni,
-                string jazyk, string velikost_tridy, string skupina)
+                string jazyk, string velikost_tridy, string skupina, string ixp)
         {
-            this.id = id;
+            this.Id_Predmet = id;
+            this.ixp = ixp;
+
             textBox_Zkratka.Text = zkratka;
             textBox_Pocet_Tyden.Text = pocet_tyden;
             textBox_Pocet_Hodin_Prednasek.Text = hodin_prednasek;
@@ -226,21 +296,32 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             //comboBox_Jazyk.SelectedIndex = comboBox_Jazyk.;
             textBox_Velikost_Trida.Text = velikost_tridy;
 
-            for (int i = 0; i < comboBox_Seznam_Skupin.Items.Count; i++)
-                if ((comboBox_Seznam_Skupin.Items[i] as combobox_item).nazev.Trim() == skupina.Trim())
+            this.skupinyUPredmetu = DB_Data.getSkupinyDleIXP(ixp);
+
+
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                foreach (DataRow row in skupinyUPredmetu.Rows)
                 {
-                    comboBox_Seznam_Skupin.SelectedIndex = i;
-                    comboBox_Seznam_Skupin.SelectedItem = comboBox_Jazyk.Items[i];
+                    if ((checkedListBox1.Items[i] as combobox_item).id == Convert.ToInt32(row.ItemArray[0]))
+                        checkedListBox1.SetItemChecked(i, true);
                 }
-            comboBox_Seznam_Skupin.SelectedIndex = comboBox_Seznam_Skupin.FindStringExact(skupina);
+
+
+            //for (int i = 0; i < comboBox_Seznam_Skupin.Items.Count; i++)
+            //    if ((comboBox_Seznam_Skupin.Items[i] as combobox_item).nazev.Trim() == skupina.Trim())
+            //    {
+            //        comboBox_Seznam_Skupin.SelectedIndex = i;
+            //        comboBox_Seznam_Skupin.SelectedItem = comboBox_Jazyk.Items[i];
+            //    }
+            //comboBox_Seznam_Skupin.SelectedIndex = comboBox_Seznam_Skupin.FindStringExact(skupina);
 
             button_Pridat.Text = "Upravit";
         }
 
-        private void _vygenerovaniStitku(int IdPredmet)
+        private void _vygenerovaniStitku(int IdPredmet, int IdSkupina)
         {
 
-            DataTable dataSkupina = DB_Data.getSkupina((comboBox_Seznam_Skupin.SelectedItem as combobox_item).id.ToString());
+            DataTable dataSkupina = DB_Data.getSkupina(IdSkupina.ToString());
             DataTable dataPredmet = DB_Data.getPredmet(IdPredmet);
 
             //DataTable data = new DataTable();
@@ -261,7 +342,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Prednasek"]) /*POČET HODIN U PŘEDNÁŠKY*/  ,
                 Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                 (comboBox_Jazyk.SelectedItem as combobox_item).id/*ID JAZYKA*/,
-                dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1] /*NÁZEV ŠTÍTKU*/);
+                dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1] /*NÁZEV ŠTÍTKU*/, IdSkupina);
 
             bool isCviceni = false;
             bool isSeminar = false;
@@ -279,13 +360,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     _VygenerovaniPocetStitku(Database_Tool.TypStitek.Cviceni, IdPredmet, Convert.ToInt32(Convert.ToInt32(dataPredmet.Rows[0]["Velikost_Tridy"])),
                         Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                         (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                        Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToInt32(dataPredmet.Rows[0]["Velikost_Tridy"])
+                        Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToInt32(dataPredmet.Rows[0]["Velikost_Tridy"]), IdSkupina
                         );
                 if (isSeminar)
                     _VygenerovaniPocetStitku(Database_Tool.TypStitek.Seminar, IdPredmet, Convert.ToInt32(Convert.ToInt32(dataPredmet.Rows[0]["Velikost_Tridy"])),
                         Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                         (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                        Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToInt32(dataPredmet.Rows[0]["Velikost_Tridy"])
+                        Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToInt32(dataPredmet.Rows[0]["Velikost_Tridy"]), IdSkupina
                         );
             }
             else
@@ -302,13 +383,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                         _VygenerovaniPocetStitku(Database_Tool.TypStitek.Cviceni, IdPredmet, pocetStudentuNaStitku,
                             Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                             (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                            pocetStitku - 1);
+                            pocetStitku - 1, IdSkupina);
 
                         //zde
                         _VygenerovaniPocetStitku(Database_Tool.TypStitek.Cviceni, IdPredmet, pocetStudentuNaStitku - posledniStitekPocetStudent,
                             Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                             (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                            1);
+                            1, IdSkupina);
 
                     }
                     if (isSeminar)
@@ -316,13 +397,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                         _VygenerovaniPocetStitku(Database_Tool.TypStitek.Seminar, IdPredmet, pocetStudentuNaStitku,
                             Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                             (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                            pocetStitku - 1);
+                            pocetStitku - 1, IdSkupina);
 
                         //zde
                         _VygenerovaniPocetStitku(Database_Tool.TypStitek.Seminar, IdPredmet, pocetStudentuNaStitku - posledniStitekPocetStudent,
                             Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                             (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
-                            1);
+                            1, IdSkupina);
                     }
                 }
 
@@ -332,15 +413,15 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         }
 
         private void _VygenerovaniPocetStitku(Database_Tool.TypStitek typStitek, int IdPredmet,
-            int pocetStudentu, int PocetHodin, int PocetTydnu, int idJazyka, string nazevStitku, int pocetStitku)
+            int pocetStudentu, int PocetHodin, int PocetTydnu, int idJazyka, string nazevStitku, int pocetStitku, int IdSkupina)
         {
             for (int i = 0; i < pocetStitku; i++)
-                _VygenerovaniKonkertniStitku(typStitek, IdPredmet, pocetStudentu, PocetHodin, PocetTydnu, idJazyka, nazevStitku + (i + 1));
+                _VygenerovaniKonkertniStitku(typStitek, IdPredmet, pocetStudentu, PocetHodin, PocetTydnu, idJazyka, nazevStitku + (i + 1), IdSkupina);
 
         }
 
         private void _VygenerovaniKonkertniStitku(Database_Tool.TypStitek typStitek, int IdPredmet,
-            int pocetStudentu, int PocetHodin, int PocetTydnu, int idJazyka, string nazevStitku)
+            int pocetStudentu, int PocetHodin, int PocetTydnu, int idJazyka, string nazevStitku, int IdSkupina)
         {
             DB_Data.setPracovniStitek(
                 String.Empty /*ZAMĚSTNANEC*/,
@@ -350,7 +431,8 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 PocetHodin,
                 PocetTydnu,
                 idJazyka,
-                nazevStitku
+                nazevStitku,
+                IdSkupina
                 );
         }
 

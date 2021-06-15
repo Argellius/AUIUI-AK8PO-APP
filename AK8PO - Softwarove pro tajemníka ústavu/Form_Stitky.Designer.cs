@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Stitky));
             this.dataGridView_Stitek = new System.Windows.Forms.DataGridView();
             this.Column_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Nazev = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -153,6 +154,7 @@
             this.Controls.Add(this.button_Priradit);
             this.Controls.Add(this.button_Vygenerovat);
             this.Controls.Add(this.dataGridView_Stitek);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Stitky";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);

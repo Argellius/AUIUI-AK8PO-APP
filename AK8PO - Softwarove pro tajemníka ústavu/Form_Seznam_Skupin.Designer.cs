@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Seznam_Skupin));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Zkratka = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -151,6 +152,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button_Pridat_Skupiny);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Seznam_Skupin";
             this.Load += new System.EventHandler(this.Form_Seznam_Skupin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

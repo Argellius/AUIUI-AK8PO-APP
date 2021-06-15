@@ -29,6 +29,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_PocetStudentuSkupina));
             this.button_potvrdit = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label_nazev = new System.Windows.Forms.Label();
@@ -89,6 +90,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.Controls.Add(this.label_nazev);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button_potvrdit);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_PocetStudentuSkupina";
             this.ResumeLayout(false);
             this.PerformLayout();

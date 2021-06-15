@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Seznam_Zamestnanec));
             this.button1 = new MetroFramework.Controls.MetroButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.collumn_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -129,6 +130,7 @@
             this.Controls.Add(this.button_Export_CSV);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Seznam_Zamestnanec";
             this.Load += new System.EventHandler(this.Form_Seznam_Zamestnanec_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
