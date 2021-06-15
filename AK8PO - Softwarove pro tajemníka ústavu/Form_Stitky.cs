@@ -57,15 +57,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             return uvazky.getBody(typ, (TypJazyk)jazyk, hodina);
         }
-
-        private void button_Vygenerovat_Click(object sender, EventArgs e)
-        {
-
-            this.Form2_Load(null, null);
-
-            MessageBox.Show("Provedeno generování štítků");
-        }
-
+             
         private void button_Priradit_Click(object sender, EventArgs e)
         {
             DataGridViewRow selectedRow;

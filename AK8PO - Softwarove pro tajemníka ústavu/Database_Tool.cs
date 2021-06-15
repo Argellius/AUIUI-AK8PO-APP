@@ -141,13 +141,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             return dtDatabases;
         }
 
-        internal void DeletePracovniStitek(int id_Predmet, int id_skupiny)
+        internal void DeletePracovniStitek(int id_Predmet, int id_skupiny, Zpusob_Vytvoreni zpusob)
         {
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = this.conn;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "DELETE FROM Pracovni_Stitek WHERE Predmet='" + id_Predmet + "' AND Skupina ='" + id_skupiny + "'";
+                command.CommandText = "DELETE FROM Pracovni_Stitek WHERE Predmet='" + id_Predmet + "' AND Skupina ='" + id_skupiny + "' AND Zpusob_Vytvoreni ='" + (int)zpusob + "'";
 
                 try
                 {
@@ -843,30 +843,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             return dtDatabases;
 
-        }
+        }       
 
-        public int getCountPracovniStitek(int predmet, int typ)
-        {
-            conn.Open();
-
-            SqlCommand command = new SqlCommand("Select count(Id) from Pracovni_Stitek where Predmet=" + predmet + " AND Typ_Stitek=" + typ, conn);
-            Int32 count = (Int32)command.ExecuteScalar();
-            conn.Close();
-
-            return count;
-        }
-
-        public bool getPracovniStitek(int predmet, int typ)
-        {
-            conn.Open();
-
-            SqlCommand command = new SqlCommand("Select count(Id) from Pracovni_Stitek where Predmet=" + predmet + " AND Typ_Stitek=" + typ, conn);
-            Int32 count = (Int32)command.ExecuteScalar();
-            conn.Close();
-
-            return count == 0 ? false : true;
-        }
-
+      
         public enum TypStitek
         {
             Prednaska = 1,
@@ -876,6 +855,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             Klasifik_Zapoc = 7,
             Zkouska = 8,
 
+
+        }
+
+        public enum Zpusob_Vytvoreni
+        {
+            Automaticky = 1,
+            Manualne = 2,
 
         }
 
@@ -890,14 +876,14 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             string Zamestnanec, int Predmet,
             TypStitek Typ_Stitek, int Pocet_Student,
             int Pocet_Hodin, int Pocet_Tyden,
-            int Jazyk, string nazev, int Skupina)
+            int Jazyk, string nazev, int Skupina, Zpusob_Vytvoreni zpusob)
         {
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = this.conn;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "INSERT into Pracovni_Stitek (Zamestnanec, Predmet, Typ_Stitek, Pocet_Student, Pocet_Hodin, Pocet_Tyden, Jazyk, nazev, Skupina) " +
-                    "VALUES (@Zamestnanec, @Predmet, @Typ_Stitek, @Pocet_Student, @Pocet_Hodin, @Pocet_Tyden, @Jazyk, @nazev, @Skupina)";
+                command.CommandText = "INSERT into Pracovni_Stitek (Zamestnanec, Predmet, Typ_Stitek, Pocet_Student, Pocet_Hodin, Pocet_Tyden, Jazyk, nazev, Skupina, Zpusob_Vytvoreni) " +
+                    "VALUES (@Zamestnanec, @Predmet, @Typ_Stitek, @Pocet_Student, @Pocet_Hodin, @Pocet_Tyden, @Jazyk, @nazev, @Skupina, @Zpusob_Vytvoreni)";
                 if (Zamestnanec == string.Empty)
                     command.Parameters.AddWithValue("@Zamestnanec", DBNull.Value);
                 else
@@ -910,6 +896,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 command.Parameters.AddWithValue("@Jazyk", (int)Jazyk);
                 command.Parameters.AddWithValue("@nazev", nazev);
                 command.Parameters.AddWithValue("@Skupina", Skupina);
+                command.Parameters.AddWithValue("@Zpusob_Vytvoreni", (int)zpusob);
 
                 try
                 {

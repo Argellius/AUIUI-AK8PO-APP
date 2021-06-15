@@ -40,7 +40,6 @@
             this.Column_Pocet_Tyden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Jazyk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_Vygenerovat = new MetroFramework.Controls.MetroButton();
             this.button_Priradit = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Stitek)).BeginInit();
             this.SuspendLayout();
@@ -126,19 +125,9 @@
             this.Column_Body.Name = "Column_Body";
             this.Column_Body.ReadOnly = true;
             // 
-            // button_Vygenerovat
-            // 
-            this.button_Vygenerovat.Location = new System.Drawing.Point(964, 27);
-            this.button_Vygenerovat.Name = "button_Vygenerovat";
-            this.button_Vygenerovat.Size = new System.Drawing.Size(140, 23);
-            this.button_Vygenerovat.TabIndex = 1;
-            this.button_Vygenerovat.Text = "Vygenerovat štítky";
-            this.button_Vygenerovat.UseSelectable = true;
-            this.button_Vygenerovat.Click += new System.EventHandler(this.button_Vygenerovat_Click);
-            // 
             // button_Priradit
             // 
-            this.button_Priradit.Location = new System.Drawing.Point(964, 57);
+            this.button_Priradit.Location = new System.Drawing.Point(964, 28);
             this.button_Priradit.Name = "button_Priradit";
             this.button_Priradit.Size = new System.Drawing.Size(139, 34);
             this.button_Priradit.TabIndex = 2;
@@ -152,7 +141,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 267);
             this.Controls.Add(this.button_Priradit);
-            this.Controls.Add(this.button_Vygenerovat);
             this.Controls.Add(this.dataGridView_Stitek);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Stitky";
@@ -166,7 +154,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView_Stitek;
-        private MetroFramework.Controls.MetroButton button_Vygenerovat;
         private MetroFramework.Controls.MetroButton button_Priradit;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Nazev;

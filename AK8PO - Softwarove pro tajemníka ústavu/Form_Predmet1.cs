@@ -109,7 +109,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 /*TODO*/
                 foreach (var item in skupiny_smazat)
                 {
-                    DB_Data.DeletePracovniStitek(this.Id_Predmet, item);
+                    DB_Data.DeletePracovniStitek(this.Id_Predmet, item, Zpusob_Vytvoreni.Automaticky);
                     DB_Data.DeletePredmetAndSkupina(this.ixp, item);
 
                 }
@@ -342,7 +342,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Prednasek"]) /*POČET HODIN U PŘEDNÁŠKY*/  ,
                 Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                 (comboBox_Jazyk.SelectedItem as combobox_item).id/*ID JAZYKA*/,
-                dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1] /*NÁZEV ŠTÍTKU*/, IdSkupina);
+                dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1] /*NÁZEV ŠTÍTKU*/, IdSkupina, Zpusob_Vytvoreni.Automaticky);
 
             bool isCviceni = false;
             bool isSeminar = false;
@@ -432,7 +432,8 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 PocetTydnu,
                 idJazyka,
                 nazevStitku,
-                IdSkupina
+                IdSkupina,
+                Zpusob_Vytvoreni.Automaticky
                 );
         }
 
