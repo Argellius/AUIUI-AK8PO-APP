@@ -20,7 +20,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             DB_Data = new Database_Tool();
         }
 
-        private void Form_Seznam_Zamestnanec_Load(object sender, EventArgs e)
+        public void Form_Seznam_Zamestnanec_Load(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
             DataTable dbtable = DB_Data.getZamestnanec();
@@ -58,13 +58,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 dataGridView1.Rows.Add(row);
             }
         }
-
+       
         private void button1_Click(object sender, EventArgs e)
         {
 
             // Create a new instance of the Form2 class
             Form_Zamestnanec settingsForm = new Form_Zamestnanec();
-
+            settingsForm.Init(this);
             // Show the settings form
             settingsForm.Show();
         }

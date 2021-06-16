@@ -89,7 +89,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             {
                 int selectedrowindex = dataGridView_Stitek.SelectedCells[0].RowIndex;
                 selectedRow = dataGridView_Stitek.Rows[selectedrowindex];
-                this.dt.DeletePracovniStitek(Convert.ToInt32(selectedRow.Cells[0].Value);
+                this.dt.DeletePracovniStitek(Convert.ToInt32(selectedRow.Cells[0].Value));
             }
             else
                 MessageBox.Show("Vyber řádek");

@@ -65,6 +65,42 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             return dtDatabases;
         }
 
+        internal bool CheckExistZamestnanec(string jmeno, string prijmeni)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "Select COUNT(*) FROM Zamestnanec WHERE Jmeno = @Jmeno AND Prijmeni = @Prijmeni";
+                command.Parameters.AddWithValue("@Jmeno", jmeno);
+                command.Parameters.AddWithValue("@Prijmeni", prijmeni);
+
+                try
+                {
+                    conn.Open();
+                    int UserExist = (int)command.ExecuteScalar();
+
+                    if (UserExist > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+                    return false;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public void setJazyk(string zkratka, string name)
         {
             using (SqlCommand command = new SqlCommand())
@@ -957,7 +993,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             {
                 command.Connection = this.conn;
                 command.CommandType = CommandType.Text;
-                command.CommandText = "INSERT into Zamestnanec (Jmeno, Prijmeni, Pracovni_Email, Soukromy_Email, Velikost_Tridy) VALUES (@Jmeno, @Prijmeni, @Pracovni_Email, @Soukromy_Email, @Velikost_Tridy)";
+                command.CommandText = "INSERT into Zamestnanec (Jmeno, Prijmeni, Pracovni_Email, Soukromy_Email, Doktorand, Uvazek) VALUES (@Jmeno, @Prijmeni, @Pracovni_Email, @Soukromy_Email, @Doktorand, @Uvazek)";
                 command.Parameters.AddWithValue("@Jmeno", Jmeno);
                 command.Parameters.AddWithValue("@Prijmeni", Prijmeni);
                 command.Parameters.AddWithValue("@Pracovni_Email", Pracovni_Email);

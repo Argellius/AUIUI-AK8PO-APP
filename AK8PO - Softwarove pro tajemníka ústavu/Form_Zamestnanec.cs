@@ -14,6 +14,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
     public partial class Form_Zamestnanec : MetroFramework.Forms.MetroForm
     {
         Database_Tool dt;
+        private Form_Seznam_Zamestnanec _parent;
 
         public Form_Zamestnanec()
         {
@@ -21,7 +22,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             dt = new Database_Tool();
         }
 
-        private void Form_Zamestnanec_Load(object sender, EventArgs e)
+        public void Form_Zamestnanec_Load(object sender, EventArgs e)
         {
             //naplnění comboboxu pro jazyk
             DataTable dataT_jazyky = dt.getJazyk();
@@ -44,8 +45,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             comboBox_Doktorant.SelectedIndex = -1;
         }
 
+        
+
         private void button_Pridat_Click(object sender, EventArgs e)
         {
+            if (dt.CheckExistZamestnanec(textBox_Jmeno.Text, textBox_Prijmeni.Text))
+            {
+                MessageBox.Show("Takový zaměstnanec již existuje");
+                return;
+            }
+                
             dt.setZamestnanec(
                 textBox_Jmeno.Text,
                 textBox_Prijmeni.Text,
@@ -53,6 +62,11 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 textBox_Soukromy_Email.Text,
                 (comboBox_Doktorant.SelectedItem as combobox_item).id == 0 ? Convert.ToByte(0) : Convert.ToByte(1),
                 Convert.ToDouble(textBox_Uvazek.Text));
+
+            MessageBox.Show("Zaměstnanec přidán");
+            this._parent.Form_Seznam_Zamestnanec_Load(this, null);
+            this.Close();
+
         }
 
         private void textBox_Jmeno_TextChanged(object sender, EventArgs e)
@@ -80,6 +94,11 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 }
             }
 
+        }
+
+        internal void Init(Form_Seznam_Zamestnanec form_Seznam_Zamestnanec)
+        {
+            this._parent = form_Seznam_Zamestnanec;
         }
 
         private void textBox_Soukromy_Email_Leave(object sender, EventArgs e)
