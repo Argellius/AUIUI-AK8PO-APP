@@ -70,7 +70,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             // 
             // textBox_Pocet_Studentu
             // 
-            this.textBox_Pocet_Studentu.Location = new System.Drawing.Point(174, 134);
+            this.textBox_Pocet_Studentu.Location = new System.Drawing.Point(174, 137);
             this.textBox_Pocet_Studentu.Name = "textBox_Pocet_Studentu";
             this.textBox_Pocet_Studentu.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Studentu.TabIndex = 5;

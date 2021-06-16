@@ -56,7 +56,7 @@
             this.Column_Forma_Studia,
             this.Column_Typ_Studia,
             this.Column_Jazyk});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 24);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 34);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(573, 239);
@@ -127,7 +127,7 @@
             // 
             // button_Pridat_Skupiny
             // 
-            this.button_Pridat_Skupiny.Location = new System.Drawing.Point(591, 24);
+            this.button_Pridat_Skupiny.Location = new System.Drawing.Point(591, 34);
             this.button_Pridat_Skupiny.Name = "button_Pridat_Skupiny";
             this.button_Pridat_Skupiny.Size = new System.Drawing.Size(85, 23);
             this.button_Pridat_Skupiny.TabIndex = 1;
@@ -137,7 +137,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(591, 53);
+            this.button2.Location = new System.Drawing.Point(591, 63);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(85, 72);
             this.button2.TabIndex = 3;
@@ -147,7 +147,7 @@
             // 
             // metroButton_Smazat
             // 
-            this.metroButton_Smazat.Location = new System.Drawing.Point(591, 131);
+            this.metroButton_Smazat.Location = new System.Drawing.Point(591, 141);
             this.metroButton_Smazat.Name = "metroButton_Smazat";
             this.metroButton_Smazat.Size = new System.Drawing.Size(85, 23);
             this.metroButton_Smazat.TabIndex = 4;
@@ -159,7 +159,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 275);
+            this.ClientSize = new System.Drawing.Size(690, 303);
             this.Controls.Add(this.metroButton_Smazat);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button_Pridat_Skupiny);

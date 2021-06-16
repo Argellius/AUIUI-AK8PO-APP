@@ -714,14 +714,17 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             return dtDatabases;
         }
 
-        public DataTable getPracovniStitkyDlePredmetu(int IdPredmet = -1)
+        public DataTable getPracovniStitkyDlePredmetu(int IdPredmet = -1, int IdSkupina = -1)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
             string where = string.Empty;
-            if (IdPredmet != -1)
+            if (IdPredmet != -1 && IdSkupina != -1)
+                where = " WHERE Predmet = '" + IdPredmet + "' AND Skupina = '" + IdSkupina + "'";
+            else if (IdPredmet != -1)
                 where = " WHERE Predmet = '" + IdPredmet + "'";
+
 
             SqlCommand command = new SqlCommand("Select * from Pracovni_Stitek" + where, conn);
             // int result = command.ExecuteNonQuery();
