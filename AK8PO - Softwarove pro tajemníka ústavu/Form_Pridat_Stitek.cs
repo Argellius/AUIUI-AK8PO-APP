@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AK8PO___Softwarove_pro_tajemníka_ústavu.Database_Tool;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
@@ -14,20 +15,12 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
     {
 
         private Database_Tool DB_Data;
+        private Form_Stitky _parent;
+
         public Form_Pridat_Stitek()
         {
             InitializeComponent();
             DB_Data = new Database_Tool();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Form_Pridat_Stitek_Load(object sender, EventArgs e)
@@ -67,6 +60,29 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             comboBox_Jazyk.SelectedIndex = -1;
             comboBox_Typ_Stitek.SelectedIndex = -1;
             comboBox_Predmet.SelectedIndex = -1;
+        }
+
+        internal void Init(Form_Stitky form_Stitky)
+        {
+            this._parent = form_Stitky;
+        }
+
+        private void button_Pridat_Click(object sender, EventArgs e)
+        {
+            DB_Data.setPracovniStitek(
+                (comboBox_Zamestnanec.SelectedItem as combobox_item).id.ToString(),
+                (comboBox_Predmet.SelectedItem as combobox_item).id,
+                (TypStitek)(comboBox_Typ_Stitek.SelectedItem as combobox_item).id,
+                Convert.ToInt32(textBox_Pocet_Studentu.Text),
+                Convert.ToInt32(textBox_Pocet_Hodin.Text),
+                Convert.ToInt32(textBox_Pocet_Tyden.Text),
+                (comboBox_Jazyk.SelectedItem as combobox_item).id,
+                textBox__Název.Text,
+                string.Empty,
+                Zpusob_Vytvoreni.Manualne
+                 );
+
+            this._parent.Form2_Load(this, null);
         }
     }
 }

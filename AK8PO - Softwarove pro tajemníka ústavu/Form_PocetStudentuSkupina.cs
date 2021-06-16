@@ -124,7 +124,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                             {
                                 this.DB_Data.setPracovniStitek(string.Empty, Convert.ToInt32(dt_Predmet.Rows[0]["Id"]), TypStitek.Cviceni, Convert.ToInt32(dt_Predmet.Rows[0]["Velikost_Tridy"]),
                                     Convert.ToInt32(dt_Predmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dt_Predmet.Rows[0]["Pocet_Tydnu"]), Convert.ToInt32(dt_Predmet.Rows[0]["Jazyk"]),
-                                    dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1], this.IdSkupina, Zpusob_Vytvoreni.Automaticky
+                                    dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1], this.IdSkupina.ToString(), Zpusob_Vytvoreni.Automaticky
                                     );
                                 pocetStitku--;
                             }
@@ -156,7 +156,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                             {
                                 this.DB_Data.setPracovniStitek(string.Empty, Convert.ToInt32(dt_Predmet.Rows[0]["Id"]), TypStitek.Cviceni, posledniStitekPocetStudent,
                                                                    Convert.ToInt32(dt_Predmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dt_Predmet.Rows[0]["Pocet_Tydnu"]), Convert.ToInt32(dt_Predmet.Rows[0]["Jazyk"]),
-                                                                   dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1], this.IdSkupina, Zpusob_Vytvoreni.Automaticky
+                                                                   dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1], this.IdSkupina.ToString(), Zpusob_Vytvoreni.Automaticky
                                                                    );
                                 pocetStitku--;
                             }
@@ -164,7 +164,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                             {
                                 this.DB_Data.setPracovniStitek(string.Empty, Convert.ToInt32(dt_Predmet.Rows[0]["Id"]), TypStitek.Cviceni, pocetStudentuNaStitku,
                                     Convert.ToInt32(dt_Predmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dt_Predmet.Rows[0]["Pocet_Tydnu"]), Convert.ToInt32(dt_Predmet.Rows[0]["Jazyk"]),
-                                    dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1], this.IdSkupina, Zpusob_Vytvoreni.Automaticky
+                                    dt_Predmet.Rows[0].ItemArray[1] + " " + dt_Skupina.Rows[0].ItemArray[1], this.IdSkupina.ToString(), Zpusob_Vytvoreni.Automaticky
                                     );
                                 pocetStitku--;
                             }

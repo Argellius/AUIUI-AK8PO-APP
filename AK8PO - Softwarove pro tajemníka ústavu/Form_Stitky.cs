@@ -77,7 +77,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
         private void metroButton_rucne_stitek_Click(object sender, EventArgs e)
         {
-            
+            Form_Pridat_Stitek settingsForm = new Form_Pridat_Stitek();
+            settingsForm.Init(this);
+            settingsForm.Show(this);
         }
     }
 }

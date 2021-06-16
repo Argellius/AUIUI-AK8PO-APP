@@ -876,7 +876,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             string Zamestnanec, int Predmet,
             TypStitek Typ_Stitek, int Pocet_Student,
             int Pocet_Hodin, int Pocet_Tyden,
-            int Jazyk, string nazev, int Skupina, Zpusob_Vytvoreni zpusob)
+            int Jazyk, string nazev, string Skupina, Zpusob_Vytvoreni zpusob)
         {
             using (SqlCommand command = new SqlCommand())
             {
