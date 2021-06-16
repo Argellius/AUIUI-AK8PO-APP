@@ -43,6 +43,7 @@
             this.Column_ixp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new MetroFramework.Controls.MetroButton();
             this.button_upravit = new MetroFramework.Controls.MetroButton();
+            this.metroButton_Smazat = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,11 +175,22 @@
             this.button_upravit.UseSelectable = true;
             this.button_upravit.Click += new System.EventHandler(this.button_zmenit_vel_tridy_Click);
             // 
+            // metroButton_Smazat
+            // 
+            this.metroButton_Smazat.Location = new System.Drawing.Point(836, 116);
+            this.metroButton_Smazat.Name = "metroButton_Smazat";
+            this.metroButton_Smazat.Size = new System.Drawing.Size(75, 39);
+            this.metroButton_Smazat.TabIndex = 3;
+            this.metroButton_Smazat.Text = "Smazat";
+            this.metroButton_Smazat.UseSelectable = true;
+            this.metroButton_Smazat.Click += new System.EventHandler(this.metroButton_Smazat_Click);
+            // 
             // Form_Seznam_Predmet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 228);
+            this.Controls.Add(this.metroButton_Smazat);
             this.Controls.Add(this.button_upravit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
@@ -207,5 +219,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Velikost_Tridy;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Skupina;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_ixp;
+        private MetroFramework.Controls.MetroButton metroButton_Smazat;
     }
 }

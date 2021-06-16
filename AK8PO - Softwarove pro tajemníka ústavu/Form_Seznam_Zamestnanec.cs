@@ -36,7 +36,8 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     body += uvazky.getBody(
                         (TypStitek)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Typ_Stitek")],
                         (TypJazyk)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Jazyk")],
-                        Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Pocet_Hodin")])
+                        Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Pocet_Hodin")]),
+                        Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Uvazek")])
                         );
 
                 }
@@ -97,6 +98,14 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }            
 
             System.IO.File.WriteAllText(lblFilePath + "\\exportZamestnance.csv", sb.ToString(), Encoding.UTF8);
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            this.DB_Data.setPracovniStitekToNullByZamestnanec((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            this.DB_Data.DeleteZamestnanec((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
+
+            this.Form_Seznam_Zamestnanec_Load(this, null);
         }
     }
 }

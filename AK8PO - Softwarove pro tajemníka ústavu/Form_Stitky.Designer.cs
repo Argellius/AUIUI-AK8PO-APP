@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Stitky));
             this.dataGridView_Stitek = new System.Windows.Forms.DataGridView();
+            this.button_Priradit = new MetroFramework.Controls.MetroButton();
+            this.metroButton_rucne_stitek = new MetroFramework.Controls.MetroButton();
             this.Column_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Nazev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Zamestnanec = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,8 +42,6 @@
             this.Column_Pocet_Tyden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Jazyk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_Priradit = new MetroFramework.Controls.MetroButton();
-            this.metroButton_rucne_stitek = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Stitek)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,8 +62,28 @@
             this.dataGridView_Stitek.Location = new System.Drawing.Point(12, 28);
             this.dataGridView_Stitek.Name = "dataGridView_Stitek";
             this.dataGridView_Stitek.ReadOnly = true;
-            this.dataGridView_Stitek.Size = new System.Drawing.Size(946, 231);
+            this.dataGridView_Stitek.Size = new System.Drawing.Size(977, 231);
             this.dataGridView_Stitek.TabIndex = 0;
+            // 
+            // button_Priradit
+            // 
+            this.button_Priradit.Location = new System.Drawing.Point(999, 28);
+            this.button_Priradit.Name = "button_Priradit";
+            this.button_Priradit.Size = new System.Drawing.Size(139, 34);
+            this.button_Priradit.TabIndex = 2;
+            this.button_Priradit.Text = "Přiřadit štítek k\r\nzaměstnanci";
+            this.button_Priradit.UseSelectable = true;
+            this.button_Priradit.Click += new System.EventHandler(this.button_Priradit_Click);
+            // 
+            // metroButton_rucne_stitek
+            // 
+            this.metroButton_rucne_stitek.Location = new System.Drawing.Point(999, 77);
+            this.metroButton_rucne_stitek.Name = "metroButton_rucne_stitek";
+            this.metroButton_rucne_stitek.Size = new System.Drawing.Size(139, 34);
+            this.metroButton_rucne_stitek.TabIndex = 3;
+            this.metroButton_rucne_stitek.Text = "Vytvořit ručně štítek";
+            this.metroButton_rucne_stitek.UseSelectable = true;
+            this.metroButton_rucne_stitek.Click += new System.EventHandler(this.metroButton_rucne_stitek_Click);
             // 
             // Column_Id
             // 
@@ -77,6 +97,7 @@
             this.Column_Nazev.HeaderText = "Název";
             this.Column_Nazev.Name = "Column_Nazev";
             this.Column_Nazev.ReadOnly = true;
+            this.Column_Nazev.Width = 130;
             // 
             // Column_Zamestnanec
             // 
@@ -126,31 +147,11 @@
             this.Column_Body.Name = "Column_Body";
             this.Column_Body.ReadOnly = true;
             // 
-            // button_Priradit
-            // 
-            this.button_Priradit.Location = new System.Drawing.Point(964, 28);
-            this.button_Priradit.Name = "button_Priradit";
-            this.button_Priradit.Size = new System.Drawing.Size(139, 34);
-            this.button_Priradit.TabIndex = 2;
-            this.button_Priradit.Text = "Přiřadit štítek k\r\nzaměstnanci";
-            this.button_Priradit.UseSelectable = true;
-            this.button_Priradit.Click += new System.EventHandler(this.button_Priradit_Click);
-            // 
-            // metroButton_rucne_stitek
-            // 
-            this.metroButton_rucne_stitek.Location = new System.Drawing.Point(964, 77);
-            this.metroButton_rucne_stitek.Name = "metroButton_rucne_stitek";
-            this.metroButton_rucne_stitek.Size = new System.Drawing.Size(139, 34);
-            this.metroButton_rucne_stitek.TabIndex = 3;
-            this.metroButton_rucne_stitek.Text = "Vytvořit ručně štítek";
-            this.metroButton_rucne_stitek.UseSelectable = true;
-            this.metroButton_rucne_stitek.Click += new System.EventHandler(this.metroButton_rucne_stitek_Click);
-            // 
             // Form_Stitky
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1106, 267);
+            this.ClientSize = new System.Drawing.Size(1146, 267);
             this.Controls.Add(this.metroButton_rucne_stitek);
             this.Controls.Add(this.button_Priradit);
             this.Controls.Add(this.dataGridView_Stitek);
@@ -167,6 +168,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView_Stitek;
         private MetroFramework.Controls.MetroButton button_Priradit;
+        private MetroFramework.Controls.MetroButton metroButton_rucne_stitek;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Nazev;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Zamestnanec;
@@ -177,6 +179,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Pocet_Tyden;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Jazyk;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Body;
-        private MetroFramework.Controls.MetroButton metroButton_rucne_stitek;
     }
 }

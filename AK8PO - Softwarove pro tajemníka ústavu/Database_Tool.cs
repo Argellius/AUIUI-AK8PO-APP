@@ -93,6 +93,84 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
+        internal void SetNullSkupinaFromStitek(int value)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE Pracovni_Stitek SET Skupina = @Skupina WHERE Skupina = @SkupinaW";
+                command.Parameters.AddWithValue("@Skupina", DBNull.Value);
+                command.Parameters.AddWithValue("@SkupinaW", value);
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                    ;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba v metodě SetNullSkupinaFromStitek: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        internal void SetNullSkupinaFromPredmet(int value)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE Predmet SET Skupina = @Skupina WHERE Skupina = @SkupinaW";
+                command.Parameters.AddWithValue("@Skupina", DBNull.Value);
+                command.Parameters.AddWithValue("@SkupinaW", value);
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                    ;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba v metodě SetNullSkupinaFromStitek: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        internal void DeleteSkupina(int value)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "DELETE FROM Skupina WHERE Id='" + value + "'";
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při mazání skupiny: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         internal void DeletePredmet(int id_Predmet)
         {
             using (SqlCommand command = new SqlCommand())
@@ -109,6 +187,57 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 catch (SqlException e)
                 {
                     MessageBox.Show("Nastala chyba při mazání předmětu: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        internal void setPracovniStitekToNullByZamestnanec(int value)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE Pracovni_Stitek SET Zamestnanec = @Zamestnanec WHERE Zamestnanec = @ZamestnanecW";
+                command.Parameters.AddWithValue("@Zamestnanec", DBNull.Value);
+                command.Parameters.AddWithValue("@ZamestnanecW", value);
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                    ;
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při mazani zaměstnance u pracovního štítku: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        internal void DeleteZamestnanec(int value)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "DELETE FROM Zamestnanec WHERE Id='" + value + "'";
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při mazání zaměstnance: " + e.Message);
                 }
                 finally
                 {

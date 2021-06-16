@@ -100,5 +100,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
     this.dataGridView1.SelectedRows[0].Cells[10].Value.ToString()
     );
         }
+
+        private void metroButton_Smazat_Click(object sender, EventArgs e)
+        {
+            dt.DeletePredmet((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
+        }
     }
 }

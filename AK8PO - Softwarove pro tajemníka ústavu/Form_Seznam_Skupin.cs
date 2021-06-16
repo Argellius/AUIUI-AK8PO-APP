@@ -67,5 +67,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             form.Init(Convert.ToInt32(tableSkupiny.Rows[0].ItemArray[this.dataGridView1.SelectedRows[0].Index]), this);
             form.Show();
         }
+
+        private void metroButton_Smazat_Click(object sender, EventArgs e)
+        {
+            dt.SetNullSkupinaFromPredmet((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            dt.SetNullSkupinaFromStitek((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            dt.DeleteSkupina((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            this.Form_Seznam_Skupin_Load(this, null);
+        }
     }
 }

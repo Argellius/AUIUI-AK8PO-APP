@@ -67,7 +67,7 @@
             this.comboBox_Jazyk.Location = new System.Drawing.Point(181, 282);
             this.comboBox_Jazyk.Name = "comboBox_Jazyk";
             this.comboBox_Jazyk.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Jazyk.TabIndex = 53;
+            this.comboBox_Jazyk.TabIndex = 6;
             // 
             // label11
             // 
@@ -117,7 +117,8 @@
             this.textBox_Pracovni_Email.Location = new System.Drawing.Point(181, 122);
             this.textBox_Pracovni_Email.Name = "textBox_Pracovni_Email";
             this.textBox_Pracovni_Email.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pracovni_Email.TabIndex = 47;
+            this.textBox_Pracovni_Email.TabIndex = 3;
+            this.textBox_Pracovni_Email.Leave += new System.EventHandler(this.textBox_Pracovni_Email_Leave);
             // 
             // label8
             // 
@@ -134,21 +135,23 @@
             this.comboBox_Doktorant.Location = new System.Drawing.Point(181, 248);
             this.comboBox_Doktorant.Name = "comboBox_Doktorant";
             this.comboBox_Doktorant.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Doktorant.TabIndex = 45;
+            this.comboBox_Doktorant.TabIndex = 5;
             // 
             // textBox_Prijmeni
             // 
             this.textBox_Prijmeni.Location = new System.Drawing.Point(181, 56);
             this.textBox_Prijmeni.Name = "textBox_Prijmeni";
             this.textBox_Prijmeni.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Prijmeni.TabIndex = 44;
+            this.textBox_Prijmeni.TabIndex = 2;
+            this.textBox_Prijmeni.TextChanged += new System.EventHandler(this.textBox_Prijmeni_TextChanged);
             // 
             // textBox_Jmeno
             // 
             this.textBox_Jmeno.Location = new System.Drawing.Point(181, 23);
             this.textBox_Jmeno.Name = "textBox_Jmeno";
             this.textBox_Jmeno.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Jmeno.TabIndex = 43;
+            this.textBox_Jmeno.TabIndex = 1;
+            this.textBox_Jmeno.TextChanged += new System.EventHandler(this.textBox_Jmeno_TextChanged);
             // 
             // label3
             // 
@@ -209,14 +212,16 @@
             this.textBox_Uvazek.Location = new System.Drawing.Point(181, 318);
             this.textBox_Uvazek.Name = "textBox_Uvazek";
             this.textBox_Uvazek.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Uvazek.TabIndex = 62;
+            this.textBox_Uvazek.TabIndex = 7;
+            this.textBox_Uvazek.Leave += new System.EventHandler(this.textBox_Uvazek_Leave);
             // 
             // textBox_Soukromy_Email
             // 
             this.textBox_Soukromy_Email.Location = new System.Drawing.Point(181, 154);
             this.textBox_Soukromy_Email.Name = "textBox_Soukromy_Email";
             this.textBox_Soukromy_Email.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Soukromy_Email.TabIndex = 64;
+            this.textBox_Soukromy_Email.TabIndex = 4;
+            this.textBox_Soukromy_Email.Leave += new System.EventHandler(this.textBox_Soukromy_Email_Leave);
             // 
             // label5
             // 

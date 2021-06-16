@@ -39,6 +39,7 @@
             this.Column_Ubazek = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Export_CSV = new MetroFramework.Controls.MetroButton();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,11 +123,22 @@
             this.button_Export_CSV.UseSelectable = true;
             this.button_Export_CSV.Click += new System.EventHandler(this.button_Export_CSV_Click);
             // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(663, 117);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(110, 39);
+            this.metroButton1.TabIndex = 5;
+            this.metroButton1.Text = "Smazat";
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
             // Form_Seznam_Zamestnanec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 296);
+            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.button_Export_CSV);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
@@ -150,5 +162,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Ubazek;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Body;
         private MetroFramework.Controls.MetroButton button_Export_CSV;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

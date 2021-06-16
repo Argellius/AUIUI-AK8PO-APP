@@ -40,6 +40,7 @@
             this.Column_Jazyk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Pridat_Skupiny = new MetroFramework.Controls.MetroButton();
             this.button2 = new MetroFramework.Controls.MetroButton();
+            this.metroButton_Smazat = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,7 +131,7 @@
             this.button_Pridat_Skupiny.Name = "button_Pridat_Skupiny";
             this.button_Pridat_Skupiny.Size = new System.Drawing.Size(85, 23);
             this.button_Pridat_Skupiny.TabIndex = 1;
-            this.button_Pridat_Skupiny.Text = "Přidat skupiny";
+            this.button_Pridat_Skupiny.Text = "Přidat";
             this.button_Pridat_Skupiny.UseSelectable = true;
             this.button_Pridat_Skupiny.Click += new System.EventHandler(this.button_Pridat_Skupiny_Click);
             // 
@@ -144,11 +145,22 @@
             this.button2.UseSelectable = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // metroButton_Smazat
+            // 
+            this.metroButton_Smazat.Location = new System.Drawing.Point(591, 131);
+            this.metroButton_Smazat.Name = "metroButton_Smazat";
+            this.metroButton_Smazat.Size = new System.Drawing.Size(85, 23);
+            this.metroButton_Smazat.TabIndex = 4;
+            this.metroButton_Smazat.Text = "Smazat";
+            this.metroButton_Smazat.UseSelectable = true;
+            this.metroButton_Smazat.Click += new System.EventHandler(this.metroButton_Smazat_Click);
+            // 
             // Form_Seznam_Skupin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 275);
+            this.Controls.Add(this.metroButton_Smazat);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button_Pridat_Skupiny);
             this.Controls.Add(this.dataGridView1);
@@ -173,5 +185,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Forma_Studia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Typ_Studia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Jazyk;
+        private MetroFramework.Controls.MetroButton metroButton_Smazat;
     }
 }
