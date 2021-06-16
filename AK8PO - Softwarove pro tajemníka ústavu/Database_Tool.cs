@@ -171,6 +171,30 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
+        internal void DeletePracovniStitek(int id)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "DELETE FROM Pracovni_Stitek WHERE Id='" + id + "'";
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při mazání předmětu: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         internal void DeletePredmet(int id_Predmet)
         {
             using (SqlCommand command = new SqlCommand())

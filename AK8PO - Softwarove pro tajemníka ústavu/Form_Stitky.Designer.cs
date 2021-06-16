@@ -42,6 +42,7 @@
             this.Column_Pocet_Tyden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Jazyk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Stitek)).BeginInit();
             this.SuspendLayout();
             // 
@@ -147,11 +148,22 @@
             this.Column_Body.Name = "Column_Body";
             this.Column_Body.ReadOnly = true;
             // 
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(999, 117);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(139, 34);
+            this.metroButton1.TabIndex = 4;
+            this.metroButton1.Text = "Smazat";
+            this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+            // 
             // Form_Stitky
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1146, 267);
+            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroButton_rucne_stitek);
             this.Controls.Add(this.button_Priradit);
             this.Controls.Add(this.dataGridView_Stitek);
@@ -179,5 +191,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Pocet_Tyden;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Jazyk;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Body;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

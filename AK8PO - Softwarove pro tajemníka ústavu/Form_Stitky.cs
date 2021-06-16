@@ -81,5 +81,21 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             settingsForm.Init(this);
             settingsForm.Show(this);
         }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow selectedRow = new DataGridViewRow();
+            if (dataGridView_Stitek.SelectedCells.Count > 0)
+            {
+                int selectedrowindex = dataGridView_Stitek.SelectedCells[0].RowIndex;
+                selectedRow = dataGridView_Stitek.Rows[selectedrowindex];
+                this.dt.DeletePracovniStitek(Convert.ToInt32(selectedRow.Cells[0].Value);
+            }
+            else
+                MessageBox.Show("Vyber řádek");
+
+            
+            
+        }
     }
 }
