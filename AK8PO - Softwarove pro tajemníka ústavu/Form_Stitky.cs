@@ -77,7 +77,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
         private void metroButton_rucne_stitek_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

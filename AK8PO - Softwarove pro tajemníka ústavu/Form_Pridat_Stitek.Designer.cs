@@ -42,10 +42,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_Pocet_Hodin = new System.Windows.Forms.TextBox();
             this.textBox_Poc_Tyden = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox_Zamestnanec = new System.Windows.Forms.ComboBox();
+            this.comboBox_Typ_Stitek = new System.Windows.Forms.ComboBox();
+            this.comboBox_Predmet = new System.Windows.Forms.ComboBox();
+            this.comboBox_Jazyk = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button_Pridat
@@ -159,47 +159,47 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.textBox_Poc_Tyden.Size = new System.Drawing.Size(100, 20);
             this.textBox_Poc_Tyden.TabIndex = 62;
             // 
-            // comboBox1
+            // comboBox_Zamestnanec
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(174, 47);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 63;
+            this.comboBox_Zamestnanec.FormattingEnabled = true;
+            this.comboBox_Zamestnanec.Location = new System.Drawing.Point(174, 47);
+            this.comboBox_Zamestnanec.Name = "comboBox_Zamestnanec";
+            this.comboBox_Zamestnanec.Size = new System.Drawing.Size(100, 21);
+            this.comboBox_Zamestnanec.TabIndex = 63;
             // 
-            // comboBox2
+            // comboBox_Typ_Stitek
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(174, 78);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(100, 21);
-            this.comboBox2.TabIndex = 64;
+            this.comboBox_Typ_Stitek.FormattingEnabled = true;
+            this.comboBox_Typ_Stitek.Location = new System.Drawing.Point(174, 78);
+            this.comboBox_Typ_Stitek.Name = "comboBox_Typ_Stitek";
+            this.comboBox_Typ_Stitek.Size = new System.Drawing.Size(100, 21);
+            this.comboBox_Typ_Stitek.TabIndex = 64;
             // 
-            // comboBox3
+            // comboBox_Predmet
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(174, 103);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(100, 21);
-            this.comboBox3.TabIndex = 65;
+            this.comboBox_Predmet.FormattingEnabled = true;
+            this.comboBox_Predmet.Location = new System.Drawing.Point(174, 103);
+            this.comboBox_Predmet.Name = "comboBox_Predmet";
+            this.comboBox_Predmet.Size = new System.Drawing.Size(100, 21);
+            this.comboBox_Predmet.TabIndex = 65;
             // 
-            // comboBox4
+            // comboBox_Jazyk
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(174, 214);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(100, 21);
-            this.comboBox4.TabIndex = 66;
+            this.comboBox_Jazyk.FormattingEnabled = true;
+            this.comboBox_Jazyk.Location = new System.Drawing.Point(174, 214);
+            this.comboBox_Jazyk.Name = "comboBox_Jazyk";
+            this.comboBox_Jazyk.Size = new System.Drawing.Size(100, 21);
+            this.comboBox_Jazyk.TabIndex = 66;
             // 
             // Form_Pridat_Stitek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(286, 302);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox_Jazyk);
+            this.Controls.Add(this.comboBox_Predmet);
+            this.Controls.Add(this.comboBox_Typ_Stitek);
+            this.Controls.Add(this.comboBox_Zamestnanec);
             this.Controls.Add(this.textBox_Poc_Tyden);
             this.Controls.Add(this.textBox_Pocet_Hodin);
             this.Controls.Add(this.label4);
@@ -214,6 +214,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form_Pridat_Stitek";
+            this.Load += new System.EventHandler(this.Form_Pridat_Stitek_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,9 +235,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_Pocet_Hodin;
         private System.Windows.Forms.TextBox textBox_Poc_Tyden;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBox_Zamestnanec;
+        private System.Windows.Forms.ComboBox comboBox_Typ_Stitek;
+        private System.Windows.Forms.ComboBox comboBox_Predmet;
+        private System.Windows.Forms.ComboBox comboBox_Jazyk;
     }
 }
