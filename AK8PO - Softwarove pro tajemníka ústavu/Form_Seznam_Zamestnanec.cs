@@ -96,7 +96,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
             }            
 
-            System.IO.File.WriteAllText(lblFilePath + "exportZamestnance.csv", sb.ToString());
+            System.IO.File.WriteAllText(lblFilePath + "\\exportZamestnance.csv", sb.ToString(), Encoding.UTF8);
         }
     }
 }

@@ -55,21 +55,21 @@
             this.comboBox_Zpusob_Zakonceni.Location = new System.Drawing.Point(181, 165);
             this.comboBox_Zpusob_Zakonceni.Name = "comboBox_Zpusob_Zakonceni";
             this.comboBox_Zpusob_Zakonceni.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Zpusob_Zakonceni.TabIndex = 32;
+            this.comboBox_Zpusob_Zakonceni.TabIndex = 6;
             // 
             // textBox_Pocet_Tyden
             // 
             this.textBox_Pocet_Tyden.Location = new System.Drawing.Point(181, 57);
             this.textBox_Pocet_Tyden.Name = "textBox_Pocet_Tyden";
             this.textBox_Pocet_Tyden.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pocet_Tyden.TabIndex = 22;
+            this.textBox_Pocet_Tyden.TabIndex = 2;
             // 
             // textBox_Zkratka
             // 
             this.textBox_Zkratka.Location = new System.Drawing.Point(181, 30);
             this.textBox_Zkratka.Name = "textBox_Zkratka";
             this.textBox_Zkratka.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Zkratka.TabIndex = 21;
+            this.textBox_Zkratka.TabIndex = 1;
             // 
             // label3
             // 
@@ -103,7 +103,7 @@
             this.textBox_Pocet_Hodin_Prednasek.Location = new System.Drawing.Point(181, 84);
             this.textBox_Pocet_Hodin_Prednasek.Name = "textBox_Pocet_Hodin_Prednasek";
             this.textBox_Pocet_Hodin_Prednasek.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pocet_Hodin_Prednasek.TabIndex = 29;
+            this.textBox_Pocet_Hodin_Prednasek.TabIndex = 3;
             // 
             // label8
             // 
@@ -119,7 +119,7 @@
             this.textBox_Pocet_Hodin_Cviceni.Location = new System.Drawing.Point(181, 111);
             this.textBox_Pocet_Hodin_Cviceni.Name = "textBox_Pocet_Hodin_Cviceni";
             this.textBox_Pocet_Hodin_Cviceni.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pocet_Hodin_Cviceni.TabIndex = 31;
+            this.textBox_Pocet_Hodin_Cviceni.TabIndex = 4;
             // 
             // label9
             // 
@@ -135,7 +135,7 @@
             this.textBox_Pocet_Hodin_Seminar.Location = new System.Drawing.Point(181, 138);
             this.textBox_Pocet_Hodin_Seminar.Name = "textBox_Pocet_Hodin_Seminar";
             this.textBox_Pocet_Hodin_Seminar.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pocet_Hodin_Seminar.TabIndex = 33;
+            this.textBox_Pocet_Hodin_Seminar.TabIndex = 5;
             // 
             // label10
             // 
@@ -152,7 +152,7 @@
             this.comboBox_Jazyk.Location = new System.Drawing.Point(181, 193);
             this.comboBox_Jazyk.Name = "comboBox_Jazyk";
             this.comboBox_Jazyk.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Jazyk.TabIndex = 35;
+            this.comboBox_Jazyk.TabIndex = 7;
             // 
             // label11
             // 
@@ -168,7 +168,7 @@
             this.textBox_Velikost_Trida.Location = new System.Drawing.Point(181, 221);
             this.textBox_Velikost_Trida.Name = "textBox_Velikost_Trida";
             this.textBox_Velikost_Trida.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Velikost_Trida.TabIndex = 37;
+            this.textBox_Velikost_Trida.TabIndex = 8;
             // 
             // label12
             // 
@@ -204,7 +204,7 @@
             this.checkedListBox1.Location = new System.Drawing.Point(181, 249);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(120, 64);
-            this.checkedListBox1.TabIndex = 41;
+            this.checkedListBox1.TabIndex = 9;
             // 
             // Form_Predmet1
             // 

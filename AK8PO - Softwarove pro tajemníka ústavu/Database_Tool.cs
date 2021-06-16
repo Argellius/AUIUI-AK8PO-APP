@@ -895,7 +895,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 command.Parameters.AddWithValue("@Pocet_Tyden", Pocet_Tyden);
                 command.Parameters.AddWithValue("@Jazyk", (int)Jazyk);
                 command.Parameters.AddWithValue("@nazev", nazev);
-                command.Parameters.AddWithValue("@Skupina", Skupina);
+                if (Skupina == string.Empty)
+                    command.Parameters.AddWithValue("@Skupina", DBNull.Value);
+                else
+                    command.Parameters.AddWithValue("@Skupina", Skupina);
                 command.Parameters.AddWithValue("@Zpusob_Vytvoreni", (int)zpusob);
 
                 try

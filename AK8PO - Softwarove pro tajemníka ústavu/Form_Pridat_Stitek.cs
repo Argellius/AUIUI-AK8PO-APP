@@ -39,13 +39,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 col_Zamestnanec.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), zkratka = string.Empty, nazev = dr.ItemArray[1].ToString().Trim() + " " + dr.ItemArray[2].ToString().Trim() });
 
             foreach (DataRow dr in dataT_Jazyky.Rows)
-                col_Jazyky.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), zkratka = dr.ItemArray[1].ToString(), nazev = dr.ItemArray[2].ToString() });
+                col_Jazyky.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), zkratka = dr.ItemArray[1].ToString().Trim(), nazev = dr.ItemArray[2].ToString().Trim() });
 
             foreach (DataRow dr in dataT_Typ_Stitek.Rows)
-                col_Typ_Stitek.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), zkratka = dr.ItemArray[1].ToString(), nazev = dr.ItemArray[2].ToString() });
+                col_Typ_Stitek.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), zkratka = dr.ItemArray[1].ToString().Trim(), nazev = dr.ItemArray[2].ToString().Trim() });
 
             foreach (DataRow dr in dataT_Predmet.Rows)
-                col_Predmet.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), zkratka = dr.ItemArray[1].ToString(), nazev = dr.ItemArray[2].ToString() });
+                col_Predmet.Add(new combobox_item { id = Convert.ToInt32(dr.ItemArray[0]), zkratka = dr.ItemArray[1].ToString().Trim(), nazev = dr.ItemArray[2].ToString().Trim() });
 
 
 

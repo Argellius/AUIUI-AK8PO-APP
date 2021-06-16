@@ -73,7 +73,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.textBox_Pocet_Studentu.Location = new System.Drawing.Point(174, 134);
             this.textBox_Pocet_Studentu.Name = "textBox_Pocet_Studentu";
             this.textBox_Pocet_Studentu.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pocet_Studentu.TabIndex = 53;
+            this.textBox_Pocet_Studentu.TabIndex = 5;
             // 
             // label10
             // 
@@ -107,7 +107,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.textBox__Název.Location = new System.Drawing.Point(174, 26);
             this.textBox__Název.Name = "textBox__Název";
             this.textBox__Název.Size = new System.Drawing.Size(100, 20);
-            this.textBox__Název.TabIndex = 44;
+            this.textBox__Název.TabIndex = 1;
             // 
             // label3
             // 
@@ -150,14 +150,14 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.textBox_Pocet_Hodin.Location = new System.Drawing.Point(174, 164);
             this.textBox_Pocet_Hodin.Name = "textBox_Pocet_Hodin";
             this.textBox_Pocet_Hodin.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pocet_Hodin.TabIndex = 61;
+            this.textBox_Pocet_Hodin.TabIndex = 6;
             // 
             // textBox_Pocet_Tyden
             // 
             this.textBox_Pocet_Tyden.Location = new System.Drawing.Point(174, 191);
             this.textBox_Pocet_Tyden.Name = "textBox_Pocet_Tyden";
             this.textBox_Pocet_Tyden.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Pocet_Tyden.TabIndex = 62;
+            this.textBox_Pocet_Tyden.TabIndex = 7;
             // 
             // comboBox_Zamestnanec
             // 
@@ -165,7 +165,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.comboBox_Zamestnanec.Location = new System.Drawing.Point(174, 54);
             this.comboBox_Zamestnanec.Name = "comboBox_Zamestnanec";
             this.comboBox_Zamestnanec.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Zamestnanec.TabIndex = 63;
+            this.comboBox_Zamestnanec.TabIndex = 2;
             // 
             // comboBox_Typ_Stitek
             // 
@@ -173,7 +173,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.comboBox_Typ_Stitek.Location = new System.Drawing.Point(174, 85);
             this.comboBox_Typ_Stitek.Name = "comboBox_Typ_Stitek";
             this.comboBox_Typ_Stitek.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Typ_Stitek.TabIndex = 64;
+            this.comboBox_Typ_Stitek.TabIndex = 3;
             // 
             // comboBox_Predmet
             // 
@@ -181,7 +181,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.comboBox_Predmet.Location = new System.Drawing.Point(174, 110);
             this.comboBox_Predmet.Name = "comboBox_Predmet";
             this.comboBox_Predmet.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Predmet.TabIndex = 65;
+            this.comboBox_Predmet.TabIndex = 4;
             // 
             // comboBox_Jazyk
             // 
@@ -189,7 +189,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.comboBox_Jazyk.Location = new System.Drawing.Point(174, 221);
             this.comboBox_Jazyk.Name = "comboBox_Jazyk";
             this.comboBox_Jazyk.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Jazyk.TabIndex = 66;
+            this.comboBox_Jazyk.TabIndex = 8;
             // 
             // Form_Pridat_Stitek
             // 
