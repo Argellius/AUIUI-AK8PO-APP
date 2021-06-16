@@ -92,6 +92,12 @@
     <Compile Include="Form_Predmet1.Designer.cs">
       <DependentUpon>Form_Predmet1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Pridat_Stitek.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Pridat_Stitek.Designer.cs">
+      <DependentUpon>Form_Pridat_Stitek.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Pridat_Zam_Stitek.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Predmet1.resx">
       <DependentUpon>Form_Predmet1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Pridat_Stitek.resx">
+      <DependentUpon>Form_Pridat_Stitek.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Pridat_Zam_Stitek.resx">
       <DependentUpon>Form_Pridat_Zam_Stitek.cs</DependentUpon>

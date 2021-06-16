@@ -74,5 +74,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             settingsForm.InitValue(Convert.ToInt32(selectedRow.Cells[0].Value), Convert.ToString(selectedRow.Cells[1].Value), Convert.ToString(selectedRow.Cells[3].Value), Convert.ToString(selectedRow.Cells[2].Value));            // Show the settings form
             settingsForm.Show(this);
         }
+
+        private void metroButton_rucne_stitek_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

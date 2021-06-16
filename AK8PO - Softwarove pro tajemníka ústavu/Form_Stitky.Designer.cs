@@ -41,6 +41,7 @@
             this.Column_Jazyk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Priradit = new MetroFramework.Controls.MetroButton();
+            this.metroButton_rucne_stitek = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Stitek)).BeginInit();
             this.SuspendLayout();
             // 
@@ -135,11 +136,22 @@
             this.button_Priradit.UseSelectable = true;
             this.button_Priradit.Click += new System.EventHandler(this.button_Priradit_Click);
             // 
+            // metroButton_rucne_stitek
+            // 
+            this.metroButton_rucne_stitek.Location = new System.Drawing.Point(964, 77);
+            this.metroButton_rucne_stitek.Name = "metroButton_rucne_stitek";
+            this.metroButton_rucne_stitek.Size = new System.Drawing.Size(139, 34);
+            this.metroButton_rucne_stitek.TabIndex = 3;
+            this.metroButton_rucne_stitek.Text = "Vytvořit ručně štítek";
+            this.metroButton_rucne_stitek.UseSelectable = true;
+            this.metroButton_rucne_stitek.Click += new System.EventHandler(this.metroButton_rucne_stitek_Click);
+            // 
             // Form_Stitky
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 267);
+            this.Controls.Add(this.metroButton_rucne_stitek);
             this.Controls.Add(this.button_Priradit);
             this.Controls.Add(this.dataGridView_Stitek);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -165,5 +177,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Pocet_Tyden;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Jazyk;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Body;
+        private MetroFramework.Controls.MetroButton metroButton_rucne_stitek;
     }
 }
