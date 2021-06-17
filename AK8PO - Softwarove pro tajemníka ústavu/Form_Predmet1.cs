@@ -281,7 +281,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             }
 
-            if (pocetStitkuCv > 1)
+            if (pocetStitkuCv >= 1)
             {
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku,
                   Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
