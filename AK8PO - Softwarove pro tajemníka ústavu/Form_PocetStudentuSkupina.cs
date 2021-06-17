@@ -57,6 +57,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 DB_Data.setSkupinaZmenaStudent(this.IdSkupina.ToString(), pocetStudentuNew);
                 MessageBox.Show("Počet studentů u skupiny změněn");
                 pregenerujStitky();
+                MessageBox.Show("Čtítky byly přegenerovány");
                 //UpravaPocetStudentuUStitku(pocetStudentuNew);
                 parent.Form_Seznam_Skupin_Load(null, null);
                 this.Close();
