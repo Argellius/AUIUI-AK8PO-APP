@@ -33,7 +33,6 @@
             this.button2 = new MetroFramework.Controls.MetroButton();
             this.button3 = new MetroFramework.Controls.MetroButton();
             this.button4 = new MetroFramework.Controls.MetroButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -76,31 +75,20 @@
             this.button4.UseSelectable = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(77, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(527, 41);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Software pro tajemníka ústavu";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 261);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.Text = "Software pro tajemníka ústavu";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -110,7 +98,6 @@
         private MetroFramework.Controls.MetroButton button2;
         private MetroFramework.Controls.MetroButton button3;
         private MetroFramework.Controls.MetroButton button4;
-        private System.Windows.Forms.Label label1;
         
     }
 }

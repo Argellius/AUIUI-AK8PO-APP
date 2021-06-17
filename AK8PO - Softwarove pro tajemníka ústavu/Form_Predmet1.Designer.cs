@@ -63,6 +63,7 @@
             this.textBox_Pocet_Tyden.Name = "textBox_Pocet_Tyden";
             this.textBox_Pocet_Tyden.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Tyden.TabIndex = 2;
+            this.textBox_Pocet_Tyden.Leave += new System.EventHandler(this.textBox_Pocet_Tyden_Leave);
             // 
             // textBox_Zkratka
             // 
@@ -104,6 +105,7 @@
             this.textBox_Pocet_Hodin_Prednasek.Name = "textBox_Pocet_Hodin_Prednasek";
             this.textBox_Pocet_Hodin_Prednasek.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Hodin_Prednasek.TabIndex = 3;
+            this.textBox_Pocet_Hodin_Prednasek.Leave += new System.EventHandler(this.textBox_Pocet_Hodin_Prednasek_Leave);
             // 
             // label8
             // 
@@ -120,6 +122,7 @@
             this.textBox_Pocet_Hodin_Cviceni.Name = "textBox_Pocet_Hodin_Cviceni";
             this.textBox_Pocet_Hodin_Cviceni.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Hodin_Cviceni.TabIndex = 4;
+            this.textBox_Pocet_Hodin_Cviceni.Leave += new System.EventHandler(this.textBox_Pocet_Hodin_Cviceni_Leave);
             // 
             // label9
             // 
@@ -136,6 +139,7 @@
             this.textBox_Pocet_Hodin_Seminar.Name = "textBox_Pocet_Hodin_Seminar";
             this.textBox_Pocet_Hodin_Seminar.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Hodin_Seminar.TabIndex = 5;
+            this.textBox_Pocet_Hodin_Seminar.Leave += new System.EventHandler(this.textBox_Pocet_Hodin_Seminar_Leave);
             // 
             // label10
             // 
@@ -169,6 +173,7 @@
             this.textBox_Velikost_Trida.Name = "textBox_Velikost_Trida";
             this.textBox_Velikost_Trida.Size = new System.Drawing.Size(100, 20);
             this.textBox_Velikost_Trida.TabIndex = 8;
+            this.textBox_Velikost_Trida.Leave += new System.EventHandler(this.textBox_Velikost_Trida_Leave);
             // 
             // label12
             // 

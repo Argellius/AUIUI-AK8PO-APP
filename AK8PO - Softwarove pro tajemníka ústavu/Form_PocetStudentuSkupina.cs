@@ -69,6 +69,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
         }
 
+
         private void pregenerujStitky()
         {
             DataTable dataPredmet = DB_Data.getPredmetDleSkupiny(this.IdSkupina);
@@ -327,6 +328,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
 
 
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            int parsedValue;
+            if (!int.TryParse(textBox2.Text, out parsedValue))
+            {
+                MessageBox.Show("Zadejte prosím Vás číslo");
+                return;
+            }
         }
     }
 }

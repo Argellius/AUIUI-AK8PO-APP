@@ -86,6 +86,16 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
             parent.Form_Seznam_Skupin_Load(null, null);
         }
+
+        private void textBox_Pocet_Student_Leave(object sender, EventArgs e)
+        {
+            int parsedValue;
+            if (!int.TryParse(textBox_Pocet_Student.Text, out parsedValue))
+            {
+                MessageBox.Show("Zadejte prosím Vás číslo");
+                return;
+            }
+        }
     }
 }
 

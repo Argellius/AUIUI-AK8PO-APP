@@ -129,6 +129,7 @@
             this.textBox_Pocet_Student.Name = "textBox_Pocet_Student";
             this.textBox_Pocet_Student.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Student.TabIndex = 9;
+            this.textBox_Pocet_Student.Leave += new System.EventHandler(this.textBox_Pocet_Student_Leave);
             // 
             // comboBox_Semestr
             // 

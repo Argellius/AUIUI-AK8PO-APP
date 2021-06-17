@@ -19,6 +19,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         Database_Tool DB_Data;
         Form_Seznam_Predmet _parent;
         int Id_Predmet = -99;
+        string velikost_tridy = String.Empty;
         private string ixp;
         private DataTable skupinyUPredmetu;
 
@@ -106,7 +107,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 List<int> skupiny_smazat = pred_skupiny.Except(aktual_skupiny).ToList();
                 List<int> skupiny_pridat = aktual_skupiny.Except(pred_skupiny).ToList();
 
-                /*TODO*/
+
                 foreach (var item in skupiny_smazat)
                 {
                     DB_Data.DeletePracovniStitek(this.Id_Predmet, item, Zpusob_Vytvoreni.Automaticky);
@@ -143,6 +144,14 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                           (comboBox_Jazyk.SelectedItem as combobox_item).id,
                           Convert.ToInt32(textBox_Velikost_Trida.Text), -99
                           , this.ixp);
+
+                if (this.velikost_tridy.Trim() != textBox_Velikost_Trida.Text.Trim())
+                {
+                    foreach (combobox_item item in checkedListBox1.CheckedItems)
+                        this.pregenerujStitky(item.id);
+
+                    MessageBox.Show("Štítky přegenerovány");
+                };
 
                 this._parent.Form_Seznam_Predmet_Load(this, null);
                 //this.UpravaPocetStudentuUStitku((comboBox_Seznam_Skupin.SelectedItem as combobox_item).id, this.id);
@@ -182,45 +191,66 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this._parent.Form_Seznam_Predmet_Load(this, null);
         }
 
+        private void pregenerujStitky(int IdSkupina)
+        {
+            DataTable dataPredmet = DB_Data.getPredmetDleSkupiny(IdSkupina);
+
+            for (int i = 0; i < dataPredmet.Rows.Count; i++)
+                UpravaPocetStudentuUStitku(IdSkupina, Convert.ToInt32(dataPredmet.Rows[0].ItemArray[0]));
+        }
+
         private void UpravaPocetStudentuUStitku(int IdSkupina, int IdPredmet)
         {
-            foreach (combobox_item item in checkedListBox1.CheckedItems)
+
+            DataTable dataSkupina = DB_Data.getSkupina(IdSkupina.ToString());
+            DataTable dataPredmet = DB_Data.getPredmet(IdPredmet);
+
+            //Počet studentů vydělím velikostí třídy a zakorouhluji nahoru
+            int pocetStitku = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToDouble(dataPredmet.Rows[0]["Velikost_Tridy"])));
+            //Počet studentů vydělím počtem štítků a tento počet nakonec odečtu od počtu studentů u posledního štítku, tj. druhé volání vygenerování počet stítků
+            int pocetStudentuNaStitku = (int)Math.Ceiling(Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / (double)pocetStitku);
+            int posledniStitekPocetStudent = (pocetStitku * pocetStudentuNaStitku) - Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]);
+            //pocetStudentuNaStitku - posledniStitekPocetStudent
+
+
+
+
+
+            DataTable dt_PracovniStitky = new DataTable();
+            dt_PracovniStitky = DB_Data.getPracovniStitkyDlePredmetu(IdPredmet, IdSkupina);
+
+            for (int i = 0; i < dt_PracovniStitky.Rows.Count; i++)
             {
-                DataTable dataSkupina = DB_Data.getSkupina(item.id.ToString());
-                DataTable dataPredmet = DB_Data.getPredmet(IdPredmet);
-
-                //Počet studentů vydělím velikostí třídy a zakorouhluji nahoru
-                int pocetStitku = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToDouble(dataPredmet.Rows[0]["Velikost_Tridy"])));
-                //Počet studentů vydělím počtem štítků a tento počet nakonec odečtu od počtu studentů u posledního štítku, tj. druhé volání vygenerování počet stítků
-                int pocetStudentuNaStitku = (int)Math.Ceiling(Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / (double)pocetStitku);
-                int posledniStitekPocetStudent = (pocetStitku * pocetStudentuNaStitku) - Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]);
-                //pocetStudentuNaStitku - posledniStitekPocetStudent
-
-                DataTable dt_PracovniStitky = new DataTable();
-                dt_PracovniStitky = DB_Data.getPracovniStitkyDlePredmetu(IdPredmet);
-                bool cviceni = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[9]) > 0 ? true : false;
-                if (cviceni)
+                if (Convert.ToInt32(dt_PracovniStitky.Rows[0]["Typ_Stitek"]) == (int)TypStitek.Prednaska)
                 {
-                    int pocetStitkuCv = pocetStitku;
-                    int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
-                    int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
-
-                    pregenerujStitku(TypStitek.Cviceni, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
-
-
+                    DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[0][0]), Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]));
+                    break;
                 }
+            }
 
-                bool seminar = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[4]) > 0 ? true : false;
-                if (seminar)
-                {
-                    int pocetStitkuCv = pocetStitku;
-                    int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
-                    int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
+            bool cviceni = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[9]) > 0 ? true : false;
+            if (cviceni)
+            {
+                int pocetStitkuCv = pocetStitku;
+                int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
+                int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
 
-                    pregenerujStitku(TypStitek.Seminar, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
-                }
+                pregenerujStitku(TypStitek.Cviceni, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
+
 
             }
+
+            bool seminar = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[4]) > 0 ? true : false;
+            if (seminar)
+            {
+                int pocetStitkuCv = pocetStitku;
+                int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
+                int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
+
+                pregenerujStitku(TypStitek.Seminar, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
+            }
+
+
 
         }
 
@@ -255,19 +285,117 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             {
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku,
                   Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
-                  (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " - Cvičení, " + dataSkupina.Rows[0].ItemArray[1] + " ",
+                  Convert.ToInt32(dataPredmet.Rows[0]["Jazyk"]), dataPredmet.Rows[0].ItemArray[1] + " - Cvičení, " + dataSkupina.Rows[0].ItemArray[1] + " ",
                   pocetStitku - 1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0])
                   );
 
 
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku - posledniStitekPocetStudent,
                     Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
-                    (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
+                    Convert.ToInt32(dataPredmet.Rows[0]["Jazyk"]), dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
                     1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0]), pocetStitku - 1
                     );
 
             }
         }
+
+
+
+        //private void pregenerujStitky(int IdSkupina)
+        //{
+        //    DataTable dataPredmet = DB_Data.getPredmetDleSkupiny(IdSkupina);
+
+        //    for (int i = 0; i < dataPredmet.Rows.Count; i++)
+        //        UpravaPocetStudentuUStitku(IdSkupina, Convert.ToInt32(dataPredmet.Rows[0].ItemArray[0]));
+        //}
+
+
+        //private void UpravaPocetStudentuUStitku(int IdSkupina, int IdPredmet)
+        //{
+        //    foreach (combobox_item item in checkedListBox1.CheckedItems)
+        //    {
+        //        DataTable dataSkupina = DB_Data.getSkupina(item.id.ToString());
+        //        DataTable dataPredmet = DB_Data.getPredmet(IdPredmet);
+
+        //        //Počet studentů vydělím velikostí třídy a zakorouhluji nahoru
+        //        int pocetStitku = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(dataSkupina.Rows[0]["Pocet_Student"]) / Convert.ToDouble(dataPredmet.Rows[0]["Velikost_Tridy"])));
+        //        //Počet studentů vydělím počtem štítků a tento počet nakonec odečtu od počtu studentů u posledního štítku, tj. druhé volání vygenerování počet stítků
+        //        int pocetStudentuNaStitku = (int)Math.Ceiling(Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]) / (double)pocetStitku);
+        //        int posledniStitekPocetStudent = (pocetStitku * pocetStudentuNaStitku) - Convert.ToInt32(dataSkupina.Rows[0]["Pocet_Student"]);
+        //        //pocetStudentuNaStitku - posledniStitekPocetStudent
+
+        //        DataTable dt_PracovniStitky = new DataTable();
+        //        dt_PracovniStitky = DB_Data.getPracovniStitkyDlePredmetu(IdPredmet);
+        //        bool cviceni = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[9]) > 0 ? true : false;
+        //        if (cviceni)
+        //        {
+        //            int pocetStitkuCv = pocetStitku;
+        //            int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
+        //            int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
+
+        //            pregenerujStitku(TypStitek.Cviceni, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
+
+
+        //        }
+
+        //        bool seminar = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[4]) > 0 ? true : false;
+        //        if (seminar)
+        //        {
+        //            int pocetStitkuCv = pocetStitku;
+        //            int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
+        //            int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
+
+        //            pregenerujStitku(TypStitek.Seminar, pocetStitkuCv, pocetStudentuNaStitkuCv, posledniStitekPocetStudentCv, dt_PracovniStitky, dataPredmet, dataSkupina);
+        //        }
+
+        //    }
+
+        //}
+
+        //private void pregenerujStitku(TypStitek typ, int pocetStitku, int pocetStudentuNaStitku, int posledniStitekPocetStudent, DataTable dt_PracovniStitky, DataTable dataPredmet, DataTable dataSkupina)
+        //{
+        //    int pocetStitkuCv = pocetStitku;
+        //    int pocetStudentuNaStitkuCv = pocetStudentuNaStitku;
+        //    int posledniStitekPocetStudentCv = posledniStitekPocetStudent;
+        //    int IdPredmet = Convert.ToInt32(dataPredmet.Rows[0].ItemArray[0]);
+        //    for (int i = 0; i < dt_PracovniStitky.Rows.Count; i++)
+        //    {
+        //        if (pocetStitkuCv == 0 && Convert.ToInt32(dt_PracovniStitky.Rows[i]["Typ_Stitek"]) == (int)typ)
+        //        {
+        //            DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i][0]), 0);
+        //        }
+
+        //        else if (pocetStitkuCv == 1 && Convert.ToInt32(dt_PracovniStitky.Rows[i]["Typ_Stitek"]) == (int)typ)
+        //        {
+        //            DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i][0]), pocetStudentuNaStitku - posledniStitekPocetStudent);
+        //            pocetStitkuCv--;
+        //        }
+
+        //        else if (Convert.ToInt32(dt_PracovniStitky.Rows[i]["Typ_Stitek"]) == (int)typ)
+        //        {
+        //            DB_Data.setPracovniStitekStudent(Convert.ToInt32(dt_PracovniStitky.Rows[i][0]), pocetStudentuNaStitku);
+        //            pocetStitkuCv--;
+        //        }
+
+        //    }
+
+        //    if (pocetStitkuCv > 1)
+        //    {
+        //        _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku,
+        //          Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
+        //          (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " - Cvičení, " + dataSkupina.Rows[0].ItemArray[1] + " ",
+        //          pocetStitku - 1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0])
+        //          );
+
+
+        //        _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku - posledniStitekPocetStudent,
+        //            Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
+        //            (comboBox_Jazyk.SelectedItem as combobox_item).id, dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
+        //            1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0]), pocetStitku - 1
+        //            );
+
+        //    }
+        //}
 
         internal void Init(int id,
                 string zkratka, string pocet_tyden, string hodin_prednasek,
@@ -276,6 +404,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         {
             this.Id_Predmet = id;
             this.ixp = ixp;
+            this.velikost_tridy = velikost_tridy;
 
             textBox_Zkratka.Text = zkratka;
             textBox_Pocet_Tyden.Text = pocet_tyden;
@@ -461,6 +590,58 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 IdSkupina.ToString(),
                 Zpusob_Vytvoreni.Automaticky
                 );
+        }
+
+        private void textBox_Pocet_Tyden_Leave(object sender, EventArgs e)
+        {
+            int parsedValue;
+            if (!int.TryParse(textBox_Pocet_Tyden.Text, out parsedValue))
+            {
+                MessageBox.Show("Zadejte prosím Vás číslo");
+                return;
+            }
+        }
+
+        private void textBox_Pocet_Hodin_Prednasek_Leave(object sender, EventArgs e)
+        {
+            int parsedValue;
+            if (!int.TryParse(textBox_Pocet_Hodin_Prednasek.Text, out parsedValue))
+            {
+                MessageBox.Show("Zadejte prosím Vás číslo");
+                return;
+            }
+        }
+
+        private void textBox_Pocet_Hodin_Cviceni_Leave(object sender, EventArgs e)
+        {
+            int parsedValue;
+            if (!int.TryParse(textBox_Pocet_Hodin_Cviceni.Text, out parsedValue))
+            {
+                MessageBox.Show("Zadejte prosím Vás číslo");
+                return;
+            }
+
+        }
+
+        private void textBox_Pocet_Hodin_Seminar_Leave(object sender, EventArgs e)
+        {
+            int parsedValue;
+            if (!int.TryParse(textBox_Pocet_Hodin_Seminar.Text, out parsedValue))
+            {
+                MessageBox.Show("Zadejte prosím Vás číslo");
+                return;
+            }
+
+        }
+
+        private void textBox_Velikost_Trida_Leave(object sender, EventArgs e)
+        {
+            int parsedValue;
+            if (!int.TryParse(textBox_Velikost_Trida.Text, out parsedValue))
+            {
+                MessageBox.Show("Zadejte prosím Vás číslo");
+                return;
+            }
         }
 
         //private void _vygenerovaniStitku()

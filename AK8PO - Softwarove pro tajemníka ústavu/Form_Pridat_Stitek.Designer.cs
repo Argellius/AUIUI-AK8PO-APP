@@ -151,6 +151,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.textBox_Pocet_Hodin.Name = "textBox_Pocet_Hodin";
             this.textBox_Pocet_Hodin.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Hodin.TabIndex = 6;
+            this.textBox_Pocet_Hodin.Leave += new System.EventHandler(this.textBox_Pocet_Hodin_Leave);
             // 
             // textBox_Pocet_Tyden
             // 
@@ -158,6 +159,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.textBox_Pocet_Tyden.Name = "textBox_Pocet_Tyden";
             this.textBox_Pocet_Tyden.Size = new System.Drawing.Size(100, 20);
             this.textBox_Pocet_Tyden.TabIndex = 7;
+            this.textBox_Pocet_Tyden.Leave += new System.EventHandler(this.textBox_Pocet_Tyden_Leave);
             // 
             // comboBox_Zamestnanec
             // 
