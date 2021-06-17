@@ -67,6 +67,52 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
         internal bool CheckExistZamestnanec(string jmeno, string prijmeni)
         {
+            int id = getZamestnanec(jmeno, prijmeni);
+
+            if (id == -1)
+               return false;
+            else
+                return true;
+
+
+            
+            //using (SqlCommand command = new SqlCommand())
+            //{
+            //    command.Connection = this.conn;
+            //    command.CommandType = CommandType.Text;
+            //    command.CommandText = "Select COUNT(*) FROM Zamestnanec WHERE Jmeno = @Jmeno AND Prijmeni = @Prijmeni";
+            //    command.Parameters.AddWithValue("@Jmeno", jmeno);
+            //    command.Parameters.AddWithValue("@Prijmeni", prijmeni);
+
+            //    try
+            //    {
+            //        conn.Open();
+            //        int UserExist = (int)command.ExecuteScalar();
+
+            //        if (UserExist > 0)
+            //        {
+            //            return true;
+            //        }
+            //        else
+            //        {
+            //            return false;
+            //        }
+            //    }
+            //    catch (SqlException e)
+            //    {
+            //        MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+            //        return false;
+            //    }
+            //    finally
+            //    {
+            //        conn.Close();
+            //    }
+            //}
+        }
+
+
+        internal bool CheckExistZamestnanec(int Id, string jmeno, string prijmeni)
+        {
             using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = this.conn;
@@ -82,6 +128,10 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
                     if (UserExist > 0)
                     {
+                        conn.Close();
+                        int zam = this.getZamestnanec( jmeno, prijmeni);
+                        if (zam == Id)
+                            return false;
                         return true;
                     }
                     else
@@ -96,10 +146,12 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 }
                 finally
                 {
+                   
                     conn.Close();
                 }
             }
         }
+
 
         public void setJazyk(string zkratka, string name)
         {
@@ -952,12 +1004,17 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             }
         }
 
-        public DataTable getZamestnanec()
+        public DataTable getZamestnanec(int id = -99)
         {
             DataTable dtDatabases = new DataTable();
             conn.Open();
 
-            SqlCommand command = new SqlCommand("Select * from Zamestnanec", conn);
+            string where = "";
+
+            if (id != -99)
+                where = " WHERE Id = '" + id + "'";
+
+            SqlCommand command = new SqlCommand("Select * from Zamestnanec" + where, conn);
             // int result = command.ExecuteNonQuery();
 
             {
@@ -969,6 +1026,18 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             conn.Close();
 
             return dtDatabases;
+        }
+
+        public int getZamestnanec(string jmeno, string prijmeni)
+        {
+            DataTable dt_zam = this.getZamestnanec();
+
+            for (int i =0; i < dt_zam.Rows.Count; i++)
+            {
+                if (dt_zam.Rows[i]["Jmeno"].ToString().Trim().ToLower() == jmeno.Trim().ToLower() && dt_zam.Rows[i]["Prijmeni"].ToString().Trim().ToLower() == prijmeni.Trim().ToLower())
+                    return Convert.ToInt32(dt_zam.Rows[i].ItemArray[0]);
+            }
+            return -1;
         }
 
         public String getZamestnanecJmeno(int id)
@@ -1003,6 +1072,40 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 command.Parameters.AddWithValue("@Soukromy_Email", Soukromy_Email);
                 command.Parameters.AddWithValue("@Doktorand", Doktorand);
                 command.Parameters.AddWithValue("@Uvazek", Uvazek);
+
+                try
+                {
+                    conn.Open();
+                    int recordsAffected = command.ExecuteNonQuery();
+                }
+                catch (SqlException e)
+                {
+                    MessageBox.Show("Nastala chyba při vkládání hodnot: " + e.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+
+            }
+        }
+
+
+        public void setZamestnanec(int id, string Jmeno, string Prijmeni, string Pracovni_Email, string Soukromy_Email, byte Doktorand, double Uvazek)
+        {
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = this.conn;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "UPDATE Zamestnanec SET Jmeno = @Jmeno, Prijmeni = @Prijmeni, Pracovni_Email = @Pracovni_Email, Soukromy_Email = @Soukromy_Email, Doktorand = @Doktorand, Uvazek = @Uvazek WHERE Id = @Id";
+                command.Parameters.AddWithValue("@Jmeno", Jmeno);
+                command.Parameters.AddWithValue("@Prijmeni", Prijmeni);
+                command.Parameters.AddWithValue("@Pracovni_Email", Pracovni_Email);
+                command.Parameters.AddWithValue("@Soukromy_Email", Soukromy_Email);
+                command.Parameters.AddWithValue("@Doktorand", Doktorand);
+                command.Parameters.AddWithValue("@Uvazek", Uvazek);
+                command.Parameters.AddWithValue("@Id", id);
 
                 try
                 {

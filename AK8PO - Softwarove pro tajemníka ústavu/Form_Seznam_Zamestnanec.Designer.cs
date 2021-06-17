@@ -40,6 +40,7 @@
             this.Column_Body = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_Export_CSV = new MetroFramework.Controls.MetroButton();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
+            this.metroButton2 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,7 +116,7 @@
             // 
             // button_Export_CSV
             // 
-            this.button_Export_CSV.Location = new System.Drawing.Point(663, 72);
+            this.button_Export_CSV.Location = new System.Drawing.Point(663, 162);
             this.button_Export_CSV.Name = "button_Export_CSV";
             this.button_Export_CSV.Size = new System.Drawing.Size(110, 39);
             this.button_Export_CSV.TabIndex = 4;
@@ -133,11 +134,22 @@
             this.metroButton1.UseSelectable = true;
             this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
+            // metroButton2
+            // 
+            this.metroButton2.Location = new System.Drawing.Point(663, 72);
+            this.metroButton2.Name = "metroButton2";
+            this.metroButton2.Size = new System.Drawing.Size(110, 39);
+            this.metroButton2.TabIndex = 6;
+            this.metroButton2.Text = "Upravit";
+            this.metroButton2.UseSelectable = true;
+            this.metroButton2.Click += new System.EventHandler(this.metroButton2_Click);
+            // 
             // Form_Seznam_Zamestnanec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 296);
+            this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.button_Export_CSV);
             this.Controls.Add(this.button1);
@@ -163,5 +175,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column_Body;
         private MetroFramework.Controls.MetroButton button_Export_CSV;
         private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton metroButton2;
     }
 }

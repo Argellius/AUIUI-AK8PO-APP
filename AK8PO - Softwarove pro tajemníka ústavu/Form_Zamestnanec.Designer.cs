@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Zamestnanec));
             this.label12 = new System.Windows.Forms.Label();
-            this.comboBox_Jazyk = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.textBox_Pracovni_Body = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox_Pracovni_Body_Bez_AJ = new System.Windows.Forms.TextBox();
@@ -55,28 +53,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 325);
+            this.label12.Location = new System.Drawing.Point(13, 286);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 13);
             this.label12.TabIndex = 54;
             this.label12.Text = "Úvazek";
-            // 
-            // comboBox_Jazyk
-            // 
-            this.comboBox_Jazyk.FormattingEnabled = true;
-            this.comboBox_Jazyk.Location = new System.Drawing.Point(181, 282);
-            this.comboBox_Jazyk.Name = "comboBox_Jazyk";
-            this.comboBox_Jazyk.Size = new System.Drawing.Size(100, 21);
-            this.comboBox_Jazyk.TabIndex = 6;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 291);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(34, 13);
-            this.label11.TabIndex = 52;
-            this.label11.Text = "Jazyk";
             // 
             // textBox_Pracovni_Body
             // 
@@ -199,7 +180,7 @@
             // 
             // button_Pridat
             // 
-            this.button_Pridat.Location = new System.Drawing.Point(181, 357);
+            this.button_Pridat.Location = new System.Drawing.Point(182, 315);
             this.button_Pridat.Name = "button_Pridat";
             this.button_Pridat.Size = new System.Drawing.Size(100, 23);
             this.button_Pridat.TabIndex = 61;
@@ -209,7 +190,7 @@
             // 
             // textBox_Uvazek
             // 
-            this.textBox_Uvazek.Location = new System.Drawing.Point(181, 318);
+            this.textBox_Uvazek.Location = new System.Drawing.Point(182, 279);
             this.textBox_Uvazek.Name = "textBox_Uvazek";
             this.textBox_Uvazek.Size = new System.Drawing.Size(100, 20);
             this.textBox_Uvazek.TabIndex = 7;
@@ -236,7 +217,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 391);
+            this.ClientSize = new System.Drawing.Size(310, 358);
             this.Controls.Add(this.textBox_Soukromy_Email);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox_Uvazek);
@@ -244,8 +225,6 @@
             this.Controls.Add(this.textBox_Cele_Jmeno);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.comboBox_Jazyk);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox_Pracovni_Body);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.textBox_Pracovni_Body_Bez_AJ);
@@ -268,8 +247,6 @@
 
         #endregion
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox_Jazyk;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox_Pracovni_Body;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox_Pracovni_Body_Bez_AJ;

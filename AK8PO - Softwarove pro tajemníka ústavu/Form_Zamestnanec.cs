@@ -8,12 +8,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AK8PO___Softwarove_pro_tajemníka_ústavu.Database_Tool;
 
 namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 {
     public partial class Form_Zamestnanec : MetroFramework.Forms.MetroForm
     {
         Database_Tool dt;
+        int Id = -99;
         private Form_Seznam_Zamestnanec _parent;
 
         public Form_Zamestnanec()
@@ -37,33 +39,55 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
 
             //Zdroje comboboxů
-            comboBox_Jazyk.DataSource = col_jazyky;
             comboBox_Doktorant.DataSource = new List<combobox_item> { new combobox_item() { id = 0, nazev = "Ne" }, new combobox_item() { id = 1, nazev = "Ano" } };
 
             //Select default empty value
-            comboBox_Jazyk.SelectedIndex = -1;
             comboBox_Doktorant.SelectedIndex = -1;
         }
 
-        
+
 
         private void button_Pridat_Click(object sender, EventArgs e)
         {
-            if (dt.CheckExistZamestnanec(textBox_Jmeno.Text, textBox_Prijmeni.Text))
-            {
-                MessageBox.Show("Takový zaměstnanec již existuje");
-                return;
-            }
-                
-            dt.setZamestnanec(
-                textBox_Jmeno.Text,
-                textBox_Prijmeni.Text,
-                textBox_Pracovni_Email.Text,
-                textBox_Soukromy_Email.Text,
-                (comboBox_Doktorant.SelectedItem as combobox_item).id == 0 ? Convert.ToByte(0) : Convert.ToByte(1),
-                Convert.ToDouble(textBox_Uvazek.Text));
 
-            MessageBox.Show("Zaměstnanec přidán");
+
+            if (this.Id != -99)
+            {
+                if (dt.CheckExistZamestnanec(this.Id, textBox_Jmeno.Text, textBox_Prijmeni.Text))
+                {
+                    MessageBox.Show("Takový zaměstnanec již existuje");
+                    return;
+                }
+
+                dt.setZamestnanec(
+                    this.Id,
+                    textBox_Jmeno.Text,
+                    textBox_Prijmeni.Text,
+                    textBox_Pracovni_Email.Text,
+                    textBox_Soukromy_Email.Text,
+                    (comboBox_Doktorant.SelectedItem as combobox_item).id == 0 ? Convert.ToByte(0) : Convert.ToByte(1),
+                    Convert.ToDouble(textBox_Uvazek.Text));
+
+                MessageBox.Show("Zaměstnanec upraven");
+            }
+            else
+            {
+                if (dt.CheckExistZamestnanec(textBox_Jmeno.Text, textBox_Prijmeni.Text))
+                {
+                    MessageBox.Show("Takový zaměstnanec již existuje");
+                    return;
+                }
+
+                dt.setZamestnanec(
+                    textBox_Jmeno.Text,
+                    textBox_Prijmeni.Text,
+                    textBox_Pracovni_Email.Text,
+                    textBox_Soukromy_Email.Text,
+                    (comboBox_Doktorant.SelectedItem as combobox_item).id == 0 ? Convert.ToByte(0) : Convert.ToByte(1),
+                    Convert.ToDouble(textBox_Uvazek.Text));
+
+                MessageBox.Show("Zaměstnanec přidán");
+            }
             this._parent.Form_Seznam_Zamestnanec_Load(this, null);
             this.Close();
 
@@ -117,7 +141,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         }
 
         private void textBox_Uvazek_Leave(object sender, EventArgs e)
-        {            
+        {
             if (textBox_Uvazek.Text.Trim() != string.Empty)
             {
                 int uvazek = Convert.ToInt32(textBox_Uvazek.Text.Trim());
@@ -128,6 +152,58 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                     textBox_Soukromy_Email.Focus();
                 }
             }
+        }
+
+        internal void InitEdit(int id, Form_Seznam_Zamestnanec parent)
+        {
+            this._parent = parent;
+            DataTable dt_zam = dt.getZamestnanec(id);
+            this.Id = id;
+            this.button_Pridat.Text = "Upravit";
+
+            this.textBox_Jmeno.Text = dt_zam.Rows[0]["Jmeno"].ToString();
+            this.textBox_Prijmeni.Text = dt_zam.Rows[0]["Prijmeni"].ToString();
+            this.textBox_Pracovni_Email.Text = dt_zam.Rows[0]["Pracovni_Email"].ToString();
+            this.textBox_Soukromy_Email.Text = dt_zam.Rows[0]["Soukromy_Email"].ToString();
+            this.textBox_Uvazek.Text = dt_zam.Rows[0]["Uvazek"].ToString();
+
+            for (int i = 0; i < comboBox_Doktorant.Items.Count; i++)
+                if ((comboBox_Doktorant.Items[i] as combobox_item).id == Convert.ToInt32(Convert.ToBoolean(dt_zam.Rows[0]["Doktorand"].ToString())))
+                {
+                    comboBox_Doktorant.SelectedIndex = i;
+                    comboBox_Doktorant.SelectedItem = comboBox_Doktorant.Items[i];
+                }
+
+            Uvazky uvazky = new Uvazky(true);
+            double body = 0;
+            DataTable dataTable = dt.getPracovniStitekNJZamestnanec(id);
+            foreach (DataRow drSt in dataTable.Rows)
+            {
+                body += uvazky.getBody(
+                    (TypStitek)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Typ_Stitek")],
+                    (TypJazyk)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Jazyk")],
+                    Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Pocet_Hodin")]),
+                    Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Uvazek")])
+                    );
+
+            };
+
+            this.textBox_Pracovni_Body.Text = body.ToString();
+
+            double body_bez_AJ = 0;
+            foreach (DataRow drSt in dataTable.Rows)
+            {
+                body_bez_AJ += uvazky.getBody(
+                    (TypStitek)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Typ_Stitek")],
+                    (TypJazyk)(int)drSt.ItemArray[dataTable.Columns.IndexOf("Jazyk")],
+                    Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Pocet_Hodin")]),
+                    Convert.ToDouble(drSt.ItemArray[dataTable.Columns.IndexOf("Uvazek")]),
+                    true
+                    );
+
+            };
+
+            this.textBox_Pracovni_Body_Bez_AJ.Text = body_bez_AJ.ToString();
         }
     }
 }

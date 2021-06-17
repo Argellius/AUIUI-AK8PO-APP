@@ -46,7 +46,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
 
         }
 
-        internal double getBody(Database_Tool.TypStitek typ, Database_Tool.TypJazyk jazyk, double hodin, double uvazek = 1)
+        internal double getBody(Database_Tool.TypStitek typ, Database_Tool.TypJazyk jazyk, double hodin, double uvazek = 1, bool bez_AJ = false)
         {
             double body = 0;
             switch (typ)
@@ -58,6 +58,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                             body = Hodina_Prednaska_CZ * hodin * uvazek;
                             break;
                         case TypJazyk.ENG:
+                            if (bez_AJ) break;
                             body = Hodina_Prednaska_AJ * hodin * uvazek;
                             break;
                         default:
@@ -71,6 +72,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                             body = Hodina_Cviceni_CZ * hodin * uvazek;
                             break;
                         case TypJazyk.ENG:
+                            if (bez_AJ) break;
                             body = Hodina_Cviceni_AJ * hodin * uvazek;
                             break;
                         default:
@@ -84,6 +86,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                             body = Hodina_Seminare_CZ * hodin * uvazek;
                             break;
                         case TypJazyk.ENG:
+                            if (bez_AJ) break;
                             body = Hodina_Seminare_AJ * hodin * uvazek;
                             break;
                         default:

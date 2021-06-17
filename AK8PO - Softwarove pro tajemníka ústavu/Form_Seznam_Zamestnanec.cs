@@ -58,7 +58,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 dataGridView1.Rows.Add(row);
             }
         }
-       
+
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -93,9 +93,9 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             {
                 if (row.Cells[0].Value == null)
                     break;
-                var cells = row.Cells.Cast<DataGridViewCell>();                                
+                var cells = row.Cells.Cast<DataGridViewCell>();
                 sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
-            }            
+            }
 
             System.IO.File.WriteAllText(lblFilePath + "\\exportZamestnance.csv", sb.ToString(), Encoding.UTF8);
         }
@@ -106,6 +106,30 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             this.DB_Data.DeleteZamestnanec((int)this.dataGridView1.SelectedRows[0].Cells[0].Value);
 
             this.Form_Seznam_Zamestnanec_Load(this, null);
+        }
+
+        private void metroButton2_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Nejprve vyber řádek");
+                return;
+            }
+
+            // Create a new instance of the Form2 class
+            Form_Zamestnanec settingsForm = new Form_Zamestnanec();
+
+            // Show the settings form
+            settingsForm.Show();
+
+            settingsForm.InitEdit(
+                (int)this.dataGridView1.SelectedRows[0].Cells[0].Value,
+                this
+                );
+            
+            
+            
+
         }
     }
 }
