@@ -285,14 +285,14 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
             {
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku,
                   Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
-                  Convert.ToInt32(dataPredmet.Rows[0]["Jazyk"]), dataPredmet.Rows[0].ItemArray[1] + " - Cvičení, " + dataSkupina.Rows[0].ItemArray[1] + " ",
+                  Convert.ToInt32(dataPredmet.Rows[0]["Jazyk"]), dataPredmet.Rows[0].ItemArray[1] + " - " + typ.ToString() + ", " + dataSkupina.Rows[0].ItemArray[1] + " ",
                   pocetStitkuCv - 1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0])
                   );
 
 
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku - posledniStitekPocetStudent,
                     Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
-                    Convert.ToInt32(dataPredmet.Rows[0]["Jazyk"]), dataPredmet.Rows[0].ItemArray[1] + " " + dataSkupina.Rows[0].ItemArray[1],
+                    Convert.ToInt32(dataPredmet.Rows[0]["Jazyk"]), dataPredmet.Rows[0].ItemArray[1] + " - " + typ.ToString() + ", " + dataSkupina.Rows[0].ItemArray[1] + " ",
                     1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0]), pocetStitku - 1
                     );
 
