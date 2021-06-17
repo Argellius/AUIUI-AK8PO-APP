@@ -144,7 +144,13 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
         {
             if (textBox_Uvazek.Text.Trim() != string.Empty)
             {
-                int uvazek = Convert.ToInt32(textBox_Uvazek.Text.Trim());
+                if (textBox_Uvazek.Text.Contains("."))
+                {
+                    MessageBox.Show("U úvazku použijte desetinnou čárku, né tečku. A akci proveďte znovu", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                double uvazek = Convert.ToDouble(textBox_Uvazek.Text.Trim());
 
                 if (!(uvazek > 0 && uvazek <= 1))
                 {
