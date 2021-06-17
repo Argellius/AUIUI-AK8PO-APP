@@ -286,7 +286,7 @@ namespace AK8PO___Softwarove_pro_tajemníka_ústavu
                 _VygenerovaniPocetStitku(typ, IdPredmet, pocetStudentuNaStitku,
                   Convert.ToInt32(dataPredmet.Rows[0]["Hodin_Cviceni"]), Convert.ToInt32(dataPredmet.Rows[0]["Pocet_Tydnu"]),
                   Convert.ToInt32(dataPredmet.Rows[0]["Jazyk"]), dataPredmet.Rows[0].ItemArray[1] + " - Cvičení, " + dataSkupina.Rows[0].ItemArray[1] + " ",
-                  pocetStitku - 1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0])
+                  pocetStitkuCv - 1, Convert.ToInt32(dataSkupina.Rows[0].ItemArray[0])
                   );
 
 
